@@ -5,46 +5,42 @@ import java.util.Scanner;
 public class Ex6 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int num1, num2, choice = 0;
+        int firstNumber, secondNumber, choice = 0;
         System.out.print("Nhập vào số nguyên thứ nhất: ");
-        num1 = scanner.nextInt();
+        firstNumber = scanner.nextInt();
         System.out.print("Nhập vào số nguyên thứ hai: ");
-        num2 = scanner.nextInt();
+        secondNumber = scanner.nextInt();
         while (choice != 8) {
-            System.out.println("**********************CACULATOR**********************\n" +
-                    "1. Tổng 2 số\n" +
-                    "2. Hiệu 2 số\n" +
-                    "3. Tích 2 số\n" +
-                    "4. Thương 2 số\n" +
-                    "5. Số dư trong phép chia 2 số\n" +
-                    "6. Ước chung lớn nhất\n" +
-                    "7. Bội chung nhỏ nhất\n" +
-                    "8. Thoát\n" +
-                    "Lựa chọn của bạn:\n");
+            System.out.println("**********************CACULATOR**********************\n" + "1. Tổng 2 số\n" + "2. Hiệu 2 số\n" + "3. Tích 2 số\n" + "4. Thương 2 số\n" + "5. Số dư trong phép chia 2 số\n" + "6. Ước chung lớn nhất\n" + "7. Bội chung nhỏ nhất\n" + "8. Thoát\n" + "Lựa chọn của bạn:\n");
             choice = scanner.nextInt();
             switch (choice) {
                 case 1: {
-                    System.out.println("Tổng của hai số nguyên là: " + (num1 + num2));
+                    System.out.printf("Tổng của hai số nguyên %d và %d là: %d\n",
+                            firstNumber, secondNumber, (firstNumber + secondNumber));
                     break;
                 }
                 case 2: {
-                    System.out.println("Hiệu của hai số nguyên là: " + (num1 - num2));
+                    System.out.printf("Hiệu của hai số nguyên %d và %d là: %d\n",
+                            firstNumber, secondNumber, (firstNumber - secondNumber));
                     break;
                 }
                 case 3: {
-                    System.out.println("Tích của hai số nguyên là: " + (num1 * num2));
+                    System.out.printf("Tích của hai số nguyên %d và %d là: %d\n",
+                            firstNumber, secondNumber, (firstNumber * secondNumber));
                     break;
                 }
                 case 4: {
-                    System.out.println("Thương của hai số nguyên là: " + (num1 / num2));
+                    System.out.printf("Thương của hai số nguyên %d và %d là: %f\n",
+                            firstNumber, secondNumber, (float) (firstNumber / secondNumber));
                     break;
                 }
                 case 5: {
-                    System.out.println("Số dư của phép chia hai số là: " + (num1 % num2));
+                    System.out.printf("Số dư của phép chia hai  %d và %d là: %.2f\n",
+                            firstNumber, secondNumber, (float) (firstNumber % secondNumber));
                     break;
                 }
                 case 6: {
-                    int a = num1, b = num2;
+                    int a = firstNumber, b = secondNumber;
                     while (b != 0) {
                         int temp = b;
                         b = a % b;
@@ -53,11 +49,11 @@ public class Ex6 {
                     System.out.println("Ước chung lớn nhất của hai số nguyên là: " + a);
                     break;
                 }
-                case 7:{
-                    int max = Math.max(num1, num2);
-                    int min = Math.min(num1, num2);
-                    for (int i = max;; i+= max) {
-                        if(i % min == 0){
+                case 7: {
+                    int max = Math.max(firstNumber, secondNumber);
+                    int min = Math.min(firstNumber, secondNumber);
+                    for (int i = max; ; i += max) {
+                        if (i % min == 0) {
                             System.out.println("Bội chung nhỏ nhất của hai số nguyên là: " + i);
                             break;
                         }
@@ -65,7 +61,7 @@ public class Ex6 {
                     break;
                 }
                 case 8:
-                    break;
+                    System.exit(0); // Thoát chương trình.
                 default:
                     System.out.println("Vui lòng nhập vào giá trị từ 1 - 8!");
             }
