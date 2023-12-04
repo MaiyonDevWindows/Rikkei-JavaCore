@@ -1,6 +1,5 @@
 package Lesson6.BonusEx.ra.entity;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Categories {
@@ -40,11 +39,20 @@ public class Categories {
         this.catalogStatus = catalogStatus;
     }
     public void inputData(Scanner scanner, Categories[] categories, int index){
-        if(index == 0)
-            categories[index].catalogId = 1;
-        else
-            categories[index].catalogId = categories[index - 1].getCatalogId() + 1;
+        if(index != 0){
+            int categoryIdMax = categories[0].getCatalogId();
+            for (int i = 0; i < index; i++)
+                if (categories[i].getCatalogId() > categoryIdMax)   categoryIdMax = categories[i].getCatalogId();
+            categories[index].catalogId = categoryIdMax + 1;
+        }
+        else categories[index].catalogId = 1;
 
+        String tempCategoryName;
+        do {
+            System.out.println("Please enter category name (less than 50 characters): ");
+            tempCategoryName = scanner.nextLine();
+
+        }while (tempCategoryName.length() > 50);
     }
     public void displayData(){
         System.out.println("displayData");
