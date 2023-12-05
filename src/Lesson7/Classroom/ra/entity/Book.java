@@ -125,7 +125,7 @@ public class Book {
         }while(this.getAuthor().length() < 6 || this.getAuthor().length() > 50);
         this.interest = this.exportPrice - this.importPrice;
         do{
-            System.out.print("Please enter year: ");
+            System.out.print("Please enter publish year: ");
             this.year = Integer.parseInt(scanner.nextLine());
         }while(this.getYear() <= 2000);
     }
@@ -138,4 +138,5 @@ public class Book {
                 "author: %s - interest: %.2f - year: %d.\n", this.getBookId(), this.getBookName(),
                 this.getImportPrice(), this.getExportPrice(), this.getAuthor(), this.getInterest(), this.getYear());
     }
+
 }
