@@ -10,10 +10,10 @@ public class ProgramMenu {
         Scanner scanner = new Scanner(System.in);
         // Các biến toàn cục.
         Categories[] categories = new Categories[100];
-        int currentCategoryIndex = 0;
+        int categoryIndex = 0;
         Products[] products = new Products[100];
-        int currentProductIndex = 0;
+        int productIndex = 0;
         ShopManagement shopManagement = new ShopManagement();
-        shopManagement.displayShopMenu(scanner, categories, currentCategoryIndex, products, currentProductIndex);
+        shopManagement.displayShopMenu(scanner, categories, categoryIndex, products, productIndex);
     }
 }
