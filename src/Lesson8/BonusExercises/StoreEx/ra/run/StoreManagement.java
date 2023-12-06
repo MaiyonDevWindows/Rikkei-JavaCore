@@ -1,4 +1,4 @@
-package Lesson7.BonusExercises.StoreEx.ra.run;
+package Lesson8.BonusExercises.StoreEx.ra.run;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package Lesson7.BonusExercises.StoreEx.ra.entity;
+package Lesson8.BonusExercises.StoreEx.ra.entity;
 
 import java.util.Date;
 

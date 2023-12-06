@@ -1,7 +1,5 @@
 package Lesson6.BonusExercises.ra.entity;
 
-import sun.lwawt.macosx.CTextPipe;
-
 import java.util.Scanner;
 
 public class Categories {
