@@ -1,6 +1,5 @@
 package Lesson9.BonusExercises.ra.presentation;
 
-import Lesson9.BonusExercises.ra.businessImp.Employee;
 import Lesson9.BonusExercises.ra.businessImp.EmployeeBusiness;
 
 import java.util.Scanner;
