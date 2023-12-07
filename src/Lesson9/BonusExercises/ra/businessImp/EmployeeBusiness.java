@@ -49,12 +49,15 @@ public class EmployeeBusiness {
 
     }
     public static void sortEmployeeBySalaryAsc(){
+        // cp sang mảng mới not null
         Collections.sort(Arrays.asList(Employee.employees));
         for (Employee employee: Employee.employees) {
             employee.displayData();
         }
+        // cp về mảng cũ.
     }
     public static void sortEmployeeByNameDesc(){
+        // cp sang mảng mới not null
         Collections.sort(Arrays.asList(Employee.employees), new Comparator<Employee>() {
             @Override
             public int compare(Employee employee01, Employee employee02) {
@@ -64,8 +67,10 @@ public class EmployeeBusiness {
         for (Employee employee: Employee.employees) {
             employee.displayData();
         }
+        // cp về mảng cũ
     }
     public static void sortEmployeeByYearAsc(){
+        // cp sang mảng mới not null.
         Collections.sort(Arrays.asList(Employee.employees), new Comparator<Employee>() {
             @Override
             public int compare(Employee employee01, Employee employee02) {
@@ -75,5 +80,6 @@ public class EmployeeBusiness {
         for (Employee employee: Employee.employees) {
             employee.displayData();
         }
+        // cp về mảng cũ
     }
 }
