@@ -1,5 +1,8 @@
 package Lesson9.BonusExercises.ra.businessImp;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class EmployeeBusiness {
@@ -28,19 +31,49 @@ public class EmployeeBusiness {
         }
     }
     public static void findEmployeesByName(Scanner scanner){
-        String findEmployeeName;
         System.out.println("Please enter employee name to find: ");
-        findEmployeeName = scanner.nextLine();
-        for (int i = 0; i < Employee.empArrayIndex; i++) {
-            if(Employee.employees[i].getEmployeeName().equals(findEmployeeName))
-                Employee.employees[i].displayData();
-        }
+        String findEmployeeId = scanner.nextLine();
+        int indexUpdate = Employee.getEmployeeIndexById(findEmployeeId);
+        if(indexUpdate >= 0){
+            Employee.employees[indexUpdate].updateEmployee(scanner);
+        }else System.err.println("Employee id is not exist.");
     }
-    public static void updatêmployeeData(Scanner scanner){
+
+    public static void updateEmployeeData(Scanner scanner){
         String findEmployeeId;
         System.out.println("Please enter employee id to update data: ");
         findEmployeeId = scanner.nextLine();
-        Employee tempEmployee = new Employee();
-        tempEmployee.inputData(scanner);
+        System.out.println("fix");
+    }
+    public static void deleteEmployee(Scanner scanner){
+
+    }
+    public static void sortEmployeeBySalaryAsc(){
+        Collections.sort(Arrays.asList(Employee.employees));
+        for (Employee employee: Employee.employees) {
+            employee.displayData();
+        }
+    }
+    public static void sortEmployeeByNameDesc(){
+        Collections.sort(Arrays.asList(Employee.employees), new Comparator<Employee>() {
+            @Override
+            public int compare(Employee employee01, Employee employee02) {
+                return - employee01.getEmployeeName().compareTo(employee02.getEmployeeName());
+            }
+        });
+        for (Employee employee: Employee.employees) {
+            employee.displayData();
+        }
+    }
+    public static void sortEmployeeByYearAsc(){
+        Collections.sort(Arrays.asList(Employee.employees), new Comparator<Employee>() {
+            @Override
+            public int compare(Employee employee01, Employee employee02) {
+                return employee01.getEmployeeYear() - employee02.getEmployeeYear();
+            }
+        });
+        for (Employee employee: Employee.employees) {
+            employee.displayData();
+        }
     }
 }

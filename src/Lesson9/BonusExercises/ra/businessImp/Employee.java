@@ -1,11 +1,10 @@
 package Lesson9.BonusExercises.ra.businessImp;
 
 import Lesson9.BonusExercises.ra.business.IEmployee;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 import java.util.Scanner;
 
-public class Employee implements IEmployee {
+public class Employee implements IEmployee, Comparable<Employee>{
     public static Employee[] employees = new Employee[100];
     public static int empArrayIndex = 0;
     private String employeeId;
@@ -32,6 +31,14 @@ public class Employee implements IEmployee {
 
     public String getEmployeeId() {
         return employeeId;
+    }
+
+    public static int getEmployeeIndexById(String employeeId){
+        for (int i = 0; i < empArrayIndex; i++) {
+            if (employees[i].employeeId.equals(employeeId))
+                return i;
+        }
+        return -1;
     }
 
     public void setEmployeeId(String employeeId) {
@@ -86,7 +93,7 @@ public class Employee implements IEmployee {
         this.employeeStatus = employeeStatus;
     }
 
-    public String inputEmployeeIdValue(Scanner scanner) {
+    public String inputEmployeeId(Scanner scanner) {
         String employeeIdValue;
         System.out.println("Please enter employee id: ");
         do {
@@ -98,42 +105,42 @@ public class Employee implements IEmployee {
         } while (true);
     }
 
-    public String inputEmployeeNameValue(Scanner scanner) {
+    public String inputEmployeeName(Scanner scanner) {
         String employeeNameValue;
         System.out.println("Please enter employee name: ");
         employeeNameValue = scanner.nextLine();
         return employeeNameValue;
     }
 
-    public int inputEmployeeYearValue(Scanner scanner) {
+    public int inputEmployeeYear(Scanner scanner) {
         int employeeYearValue;
         System.out.println("Please enter employee year: ");
         employeeYearValue = Integer.parseInt(scanner.nextLine());
         return employeeYearValue;
     }
 
-    public float inputEmployeeRateValue(Scanner scanner) {
+    public float inputEmployeeRate(Scanner scanner) {
         float employeeRateValue;
         System.out.println("Please enter employee rate: ");
         employeeRateValue = Float.parseFloat(scanner.nextLine());
         return employeeRateValue;
     }
 
-    public float inputEmployeeCommissionValue(Scanner scanner) {
+    public float inputEmployeeCommission(Scanner scanner) {
         float employeeCommissionValue;
         System.out.println("Please enter employee commission: ");
         employeeCommissionValue = Float.parseFloat(scanner.nextLine());
         return employeeCommissionValue;
     }
 
-    public float inputEmployeeSalaryValue(Scanner scanner) {
+    public float inputEmployeeSalary(Scanner scanner) {
         float employeeSalaryValue;
         System.out.println("Please enter employee salary: ");
         employeeSalaryValue = Float.parseFloat(scanner.nextLine());
         return employeeSalaryValue;
     }
 
-    public boolean inputEmployeeStatusValue(Scanner scanner) {
+    public boolean inputEmployeeStatus(Scanner scanner) {
         String employeeStatusStr;
         System.out.println("Please enter employee status: ");
         do {
@@ -155,13 +162,51 @@ public class Employee implements IEmployee {
 
     @Override
     public void inputData(Scanner scanner) {
-        this.employeeId = inputEmployeeIdValue(scanner);
-        this.employeeName = inputEmployeeNameValue(scanner);
-        this.employeeYear = inputEmployeeYearValue(scanner);
-        this.employeeRate = inputEmployeeRateValue(scanner);
-        this.employeeCommission = inputEmployeeCommissionValue(scanner);
-        this.employeeSalary = inputEmployeeSalaryValue(scanner);
-        this.employeeStatus = inputEmployeeStatusValue(scanner);
+        this.employeeId = inputEmployeeId(scanner);
+        this.employeeName = inputEmployeeName(scanner);
+        this.employeeYear = inputEmployeeYear(scanner);
+        this.employeeRate = inputEmployeeRate(scanner);
+        this.employeeCommission = inputEmployeeCommission(scanner);
+        this.employeeSalary = inputEmployeeSalary(scanner);
+        this.employeeStatus = inputEmployeeStatus(scanner);
+    }
+
+    @Override
+    public void updateEmployee(Scanner scanner) {
+        boolean isExit = true;
+        do {
+            System.out.println("1. Update employee name." +
+                    "2. Update employee year." +
+                    "3. Update employee rate.\n" +
+                    "4. Update employee commission.\n" +
+                    "5. Update employee salary.\n" +
+                    "6. Update employee status.\n" +
+                    "7. Exit.\n" +
+                    "Please enter your choice: ");
+            int choice = Integer.parseInt(scanner.nextLine());
+            switch (choice) {
+                case 1:
+                    this.employeeName = inputEmployeeName(scanner);
+                    break;
+                case 2:
+                    this.employeeYear = inputEmployeeYear(scanner);
+                    break;
+                case 3:
+                    this.employeeRate = inputEmployeeRate(scanner);
+                    break;
+                case 4:
+                    this.employeeCommission = inputEmployeeCommission(scanner);
+                    break;
+                case 5:
+                    this.employeeSalary = inputEmployeeSalary(scanner);
+                    break;
+                case 6:
+                    this.employeeStatus = inputEmployeeStatus(scanner);
+                    break;
+                default:
+                    isExit = false;
+            }
+        } while (isExit);
     }
 
     @Override
@@ -174,5 +219,14 @@ public class Employee implements IEmployee {
 
     public float calSalary() {
         return employeeSalary = employeeRate * BASIC_SALARY + employeeCommission;
+    }
+
+    @Override
+    public int compareTo(Employee employee) {
+        if(this.employeeSalary - employee.getEmployeeSalary() > 0)
+            return 1;
+        else if(this.employeeSalary - employee.getEmployeeSalary() == 0)
+            return 0;
+        else return -1;
     }
 }

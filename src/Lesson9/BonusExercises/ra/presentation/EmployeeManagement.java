@@ -1,5 +1,6 @@
 package Lesson9.BonusExercises.ra.presentation;
 
+import Lesson9.BonusExercises.ra.businessImp.Employee;
 import Lesson9.BonusExercises.ra.businessImp.EmployeeBusiness;
 
 import java.util.Scanner;
@@ -37,14 +38,18 @@ public class EmployeeManagement {
                     EmployeeBusiness.findEmployeesByName(scanner);
                     break;
                 case 5:
+                    EmployeeBusiness.updateEmployeeData(scanner);
                     break;
                 case 6:
                     break;
                 case 7:
+                    EmployeeBusiness.sortEmployeeBySalaryAsc();
                     break;
                 case 8:
+                    EmployeeBusiness.sortEmployeeByNameDesc();
                     break;
                 case 9:
+                    EmployeeBusiness.sortEmployeeByYearAsc();
                     break;
                 case 10:
                     isExit = true;
