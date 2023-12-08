@@ -40,6 +40,7 @@ public class EmployeeManagement {
                     EmployeeBusiness.updateEmployeeData(scanner);
                     break;
                 case 6:
+                    EmployeeBusiness.deleteEmployee(scanner);
                     break;
                 case 7:
                     EmployeeBusiness.sortEmployeeBySalaryAsc();

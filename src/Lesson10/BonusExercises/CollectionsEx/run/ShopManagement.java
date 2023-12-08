@@ -1,4 +1,4 @@
-package Lesson10.BonusExercises.CollectionsEx.ra.run;
+package Lesson10.BonusExercises.CollectionsEx.run;
 
 import java.util.Scanner;
 

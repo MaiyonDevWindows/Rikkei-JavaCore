@@ -1,5 +1,6 @@
 package Lesson9.BonusExercises.ra.businessImp;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -46,40 +47,42 @@ public class EmployeeBusiness {
         System.out.println("fix");
     }
     public static void deleteEmployee(Scanner scanner){
-
+        String delEmployeeId;
+        System.out.println("Please enter employee id to delete data:");
+        System.out.println("fix");
     }
     public static void sortEmployeeBySalaryAsc(){
-        // cp sang mảng mới not null
-        Collections.sort(Arrays.asList(Employee.employees));
+        Employee[] tempEmployees = Arrays.copyOf(Employee.employees, Employee.empArrayIndex);
+        Collections.sort(Arrays.asList(tempEmployees));
+        Employee.employees = Arrays.copyOf(Employee.employees, Employee.empArrayIndex);
         for (Employee employee: Employee.employees) {
             employee.displayData();
         }
-        // cp về mảng cũ.
     }
     public static void sortEmployeeByNameDesc(){
-        // cp sang mảng mới not null
+        Employee[] tempEmployees = Arrays.copyOf(Employee.employees, Employee.empArrayIndex);
         Collections.sort(Arrays.asList(Employee.employees), new Comparator<Employee>() {
             @Override
             public int compare(Employee employee01, Employee employee02) {
                 return - employee01.getEmployeeName().compareTo(employee02.getEmployeeName());
             }
         });
+        Employee.employees = Arrays.copyOf(Employee.employees, Employee.empArrayIndex);
         for (Employee employee: Employee.employees) {
             employee.displayData();
         }
-        // cp về mảng cũ
     }
     public static void sortEmployeeByYearAsc(){
-        // cp sang mảng mới not null.
+        Employee[] tempEmployees = Arrays.copyOf(Employee.employees, Employee.empArrayIndex);
         Collections.sort(Arrays.asList(Employee.employees), new Comparator<Employee>() {
             @Override
             public int compare(Employee employee01, Employee employee02) {
                 return employee01.getEmployeeYear() - employee02.getEmployeeYear();
             }
         });
+        Employee.employees = Arrays.copyOf(Employee.employees, Employee.empArrayIndex);
         for (Employee employee: Employee.employees) {
             employee.displayData();
         }
-        // cp về mảng cũ
     }
 }

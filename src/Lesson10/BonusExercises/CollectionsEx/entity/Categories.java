@@ -1,6 +1,6 @@
-package Lesson10.BonusExercises.CollectionsEx.ra.entity;
+package Lesson10.BonusExercises.CollectionsEx.entity;
 
-import Lesson10.BonusExercises.CollectionsEx.ra.IShop;
+import Lesson10.BonusExercises.CollectionsEx.entityImp.IShop;
 
 import java.util.Scanner;
 

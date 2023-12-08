@@ -1,4 +1,4 @@
-package Lesson10.BonusExercises.CollectionsEx.ra;
+package Lesson10.BonusExercises.CollectionsEx.entityImp;
 
 import java.util.Scanner;
 
