@@ -33,8 +33,7 @@ public class ValidateDataDemo {
         System.out.println("Nhập vào một ngày:");
         do {
             try {
-                Date date = sdf.parse(scanner.nextLine());
-                return date;
+                return sdf.parse(scanner.nextLine());
             } catch (ParseException e) {
                 System.err.println("Định dạng ngày dd/MM/yyyy, vui lòng nhập lại");
             }

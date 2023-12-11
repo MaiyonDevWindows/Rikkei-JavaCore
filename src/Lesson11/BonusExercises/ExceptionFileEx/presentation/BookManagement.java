@@ -10,7 +10,6 @@ public class BookManagement implements IBookManagement {
     public void displayMenu(Scanner scanner) {
         int choice;
         boolean isExit = false;
-
         do {
             System.out.println("*********************************MENU********************************\n" +
                     "1. Input books data.\n" +
