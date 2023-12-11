@@ -13,7 +13,7 @@ public class EmployeeBusiness {
         n = Integer.parseInt(scanner.nextLine());
         Employee employee = new Employee();
         for (int i = 0; i < n; i++) {
-            System.out.println("Please input data for employee " + i);
+            System.out.println("Please inputMethods data for employee " + i);
             employee.inputData(scanner);
             Employee.employees[Employee.empArrayIndex] = employee;
             Employee.empArrayIndex += 1;

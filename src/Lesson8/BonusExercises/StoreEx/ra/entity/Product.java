@@ -48,7 +48,7 @@ public class Product {
         this.productStatus = productStatus;
     }
     public void inputData(){
-        System.out.println("input data");
+        System.out.println("inputMethods data");
     }
     public void displayData(){
         System.out.println("display data");

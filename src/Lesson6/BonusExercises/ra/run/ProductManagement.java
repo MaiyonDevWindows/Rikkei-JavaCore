@@ -10,7 +10,7 @@ public class ProductManagement {
         boolean isExit = false;
         do {
             System.out.println("*******************PRODUCT MANAGEMENT*****************\n" +
-                    "1. Products data input.\n" +
+                    "1. Products data inputMethods.\n" +
                     "2. Display products data.\n" +
                     "3. Sort products by price.\n" +
                     "4. Update product data by product id.\n" +
@@ -22,7 +22,7 @@ public class ProductManagement {
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice){
                 case 1:{
-                    System.out.println("Products data input: ");
+                    System.out.println("Products data inputMethods: ");
                     break;
                 }
                 case 2:{

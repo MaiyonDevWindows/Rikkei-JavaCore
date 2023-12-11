@@ -10,7 +10,7 @@ public class CategoryManagement {
         boolean isExit = false;
         do {
             System.out.println("********************CATEGORIES MENU***********\n" +
-                    "1. Categories data input.\n" +
+                    "1. Categories data inputMethods.\n" +
                     "2. Categories data display.\n" +
                     "3. Update category data.\n" +
                     "4. Delete category.\n" +
@@ -20,7 +20,7 @@ public class CategoryManagement {
             choice = Integer.parseInt(scanner.nextLine());
             switch (choice) {
                 case 1: {
-                    System.out.println("Categories data input: ");
+                    System.out.println("Categories data inputMethods: ");
                     Categories tempCategory = new Categories();
                     tempCategory.inputData(scanner, categories, categoriesIndex);
                     categoriesIndex += 1;

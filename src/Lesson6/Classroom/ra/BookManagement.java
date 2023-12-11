@@ -35,7 +35,7 @@ public class BookManagement {
                     System.out.print("Please enter book quantity (n): ");
                     n = Integer.parseInt(scanner.nextLine());
                     for (int i = 0; i < n; i++) {
-                        System.out.println("Please input date for book " + i);
+                        System.out.println("Please inputMethods date for book " + i);
                         bookArray[i].inputData(scanner);
                     }
                 }
