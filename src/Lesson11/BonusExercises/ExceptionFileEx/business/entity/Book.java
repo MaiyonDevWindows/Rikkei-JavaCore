@@ -159,7 +159,6 @@ public class Book implements IBook {
     public boolean validateExportPrice(float exportPrice) {
         return exportPrice > this.importPrice;
     }
-
     @Override
     public String inputAuthor(Scanner scanner) {
         System.out.print("Please enter author name: ");
@@ -170,18 +169,15 @@ public class Book implements IBook {
         }
         return authorName;
     }
-
     @Override
     public boolean validateAuthorName(String authorName) {
         return (authorName.length() >= 6 && authorName.length() <= 50);
     }
-
     @Override
     public Date inputCreatedDate(Scanner scanner) {
         System.out.print("Please enter create date: ");
         return inputMethods.inputDate(scanner);
     }
-
     @Override
     public String inputDescriptions(Scanner scanner) {
         System.out.print("Please enter descriptions: ");
@@ -192,12 +188,10 @@ public class Book implements IBook {
         }
         return descriptions;
     }
-
     @Override
     public boolean validateDescriptions(String descriptions) {
         return descriptions.length() <= 500;
     }
-
     @Override
     public void inputData(Scanner scanner) {
         this.bookId = generateBookId();
@@ -208,7 +202,6 @@ public class Book implements IBook {
         this.created = inputCreatedDate(scanner);
         this.descriptions = inputDescriptions(scanner);
     }
-
     @Override
     public void updateDataByBookId(Scanner scanner, int bookId) {
         for (Book book : booksList) {
@@ -223,7 +216,6 @@ public class Book implements IBook {
             }
         }
     }
-
     @Override
     public void displayData() {
         System.out.printf("Book id: %s - book name: %s - author: %s - created: %s,\n" +
