@@ -92,15 +92,12 @@ public class Book implements IBook {
 
     @Override
     public int generateBookId() {
-        if (booksList.isEmpty()) {
-            return 1;
-        } else {
-            int idMax = 0;
-            for (Book book : booksList) {
+        int idMax = 0;
+        if (!booksList.isEmpty()) {
+            for (Book book : booksList)
                 if (book.bookId > idMax) idMax = book.bookId;
-            }
-            return idMax + 1;
         }
+        return idMax + 1;
     }
 
     @Override

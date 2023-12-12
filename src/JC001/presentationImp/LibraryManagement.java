@@ -19,8 +19,12 @@ public class LibraryManagement implements SystemPresentation {
             choice = InputDataMethods.inputInteger(scanner);
             switch (choice){
                 case 1:
+                    CategoryManagement categoryManagement = new CategoryManagement();
+                    categoryManagement.displayMenu(scanner);
                     break;
                 case 2:
+                    BookManagement bookManagement = new BookManagement();
+                    bookManagement.displayMenu(scanner);
                     break;
                 case 3:
                     isExit = true;
