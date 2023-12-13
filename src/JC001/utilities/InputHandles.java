@@ -2,7 +2,7 @@ package JC001.utilities;
 
 import java.util.Scanner;
 
-public class InputDataMethods {
+public class InputHandles {
     public static int inputInteger(Scanner scanner) {
         int inputInt;
         do {
@@ -47,5 +47,13 @@ public class InputDataMethods {
             booleanValue = scanner.nextLine().trim().replaceAll("\\s+"," ");
         }
         return Boolean.parseBoolean(booleanValue);
+    }
+    public static boolean inputConfirmValue(Scanner scanner){
+        String booleanValue = scanner.nextLine().trim().replaceAll("\\s+"," ");
+        while(!booleanValue.equalsIgnoreCase("yes") && !booleanValue.equalsIgnoreCase("no")){
+            System.err.println("You must enter Yes/No value, please try again.");
+            booleanValue = scanner.nextLine().trim().replaceAll("\\s+"," ");
+        }
+        return booleanValue.equalsIgnoreCase("yes");
     }
 }

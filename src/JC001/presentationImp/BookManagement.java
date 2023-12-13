@@ -2,7 +2,7 @@ package JC001.presentationImp;
 
 import JC001.businessImp.BookBusinessImp;
 import JC001.presentation.SystemPresentation;
-import JC001.utilities.InputDataMethods;
+import JC001.utilities.InputHandles;
 
 import java.util.Scanner;
 
@@ -12,30 +12,36 @@ public class BookManagement implements SystemPresentation {
         boolean isExit = false;
         int choice;
         do {
-            System.out.println("===== BOOK MANAGEMENT =====\n" +
+            System.out.print("===== BOOK MANAGEMENT =====\n" +
                     "1. Add new books.\n" +
                     "2. Update book data.\n" +
                     "3. Delete book by book id.\n" +
                     "4. Find book by book name.\n" +
                     "5. Display by book 's category.\n" +
-                    "6. Back." +
+                    "6. Back.\n" +
                     "Please enter your choice: ");
-            choice = InputDataMethods.inputInteger(scanner);
+            choice = InputHandles.inputInteger(scanner);
             switch (choice){
                 case 1:
                     BookBusinessImp.addNewBooks(scanner);
                     break;
                 case 2:
-                    BookBusinessImp.displayAllBooks();
+                    BookBusinessImp.updateBookData(scanner);
                     break;
                 case 3:
+                    // BookBusinessImp.deleteBookById(scanner);
                     break;
                 case 4:
+                    // BookBusinessImp.findBookByBookName(scanner);
                     break;
                 case 5:
+                    // BookBusinessImp.displayBooksByCategory(scanner);
                     break;
                 case 6:
                     isExit = true;
+                    break;
+                case 7:
+                    BookBusinessImp.displayAllBooks();
                     break;
                 default:
                     System.err.println("You enter wrong choice value, please try again.");

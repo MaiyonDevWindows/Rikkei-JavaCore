@@ -1,8 +1,7 @@
 package JC001.entityImp;
 
 import JC001.entity.IEntity;
-import JC001.utilities.InputDataMethods;
-import jdk.internal.util.xml.impl.Input;
+import JC001.utilities.InputHandles;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -64,11 +63,19 @@ public class Category implements IEntity {
         }
         return maxCategoryId + 1;
     }
+    public static boolean isExistCategoryId(int categoryId){
+        Iterator<Category> categoryIterator = categoriesList.iterator();
+        while (categoryIterator.hasNext()){
+            if(categoryIterator.next().getCategoryId() == categoryId)
+                return true;
+        }
+        return false;
+    }
     public String inputCategoryName(Scanner scanner){
         System.out.print("Please enter category name: ");
-        String categoryName = InputDataMethods.inputString(scanner);
+        String categoryName = InputHandles.inputString(scanner);
         while (!isValidateCategoryName(categoryName) || isExistCategoryName(categoryName))
-            categoryName = InputDataMethods.inputString(scanner);
+            categoryName = InputHandles.inputString(scanner);
         return capitalizeString(categoryName);
     }
     public boolean isValidateCategoryName(String categoryName){
@@ -94,7 +101,7 @@ public class Category implements IEntity {
     }
     public boolean inputCategoryStatus(Scanner scanner){
         System.out.print("Please enter category status: ");
-        categoryStatus = InputDataMethods.inputBoolean(scanner);
+        categoryStatus = InputHandles.inputBoolean(scanner);
         return categoryStatus;
     }
 
@@ -109,6 +116,13 @@ public class Category implements IEntity {
                 "categoryId=" + categoryId +
                 ", categoryName='" + categoryName + '\'' +
                 ", categoryStatus=" + categoryStatus +
+                '}';
+    }
+    public String statisticsNumberOfBooksByCategory(){
+        return "Category{" +
+                "categoryId=" + categoryId +
+                ", categoryName='" + categoryName + '\'' +
+                ", numberOfBooks=" + Book.getNumberOfBooksByCategoryId(categoryId) +
                 '}';
     }
 }

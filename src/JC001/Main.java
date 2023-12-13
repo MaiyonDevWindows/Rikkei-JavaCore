@@ -1,13 +1,13 @@
 package JC001;
 
-import JC001.presentationImp.LibraryManagement;
+import JC001.presentationImp.LibraryManagementImp;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        LibraryManagement libraryManagement = new LibraryManagement();
-        libraryManagement.displayMenu(scanner);
+        LibraryManagementImp libraryManagementImp = new LibraryManagementImp();
+        libraryManagementImp.displayMenu(scanner);
     }
 }

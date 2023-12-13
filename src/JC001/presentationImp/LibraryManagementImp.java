@@ -1,26 +1,26 @@
 package JC001.presentationImp;
 
 import JC001.presentation.SystemPresentation;
-import JC001.utilities.InputDataMethods;
+import JC001.utilities.InputHandles;
 
 import java.util.Scanner;
 
-public class LibraryManagement implements SystemPresentation {
+public class LibraryManagementImp implements SystemPresentation {
     @Override
     public void displayMenu(Scanner scanner){
         boolean isExit = false;
         int choice;
         do {
-            System.out.println("===== LIBRARY MANAGEMENT =====\n" +
+            System.out.print("===== LIBRARY MANAGEMENT =====\n" +
                     "1. Category management.\n" +
                     "2. Book management.\n" +
                     "3. Exit.\n" +
                     "Please enter your choice: ");
-            choice = InputDataMethods.inputInteger(scanner);
+            choice = InputHandles.inputInteger(scanner);
             switch (choice){
                 case 1:
-                    CategoryManagement categoryManagement = new CategoryManagement();
-                    categoryManagement.displayMenu(scanner);
+                    CategoryManagementImp categoryManagementImp = new CategoryManagementImp();
+                    categoryManagementImp.displayMenu(scanner);
                     break;
                 case 2:
                     BookManagement bookManagement = new BookManagement();

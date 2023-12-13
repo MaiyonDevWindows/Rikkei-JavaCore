@@ -1,8 +1,7 @@
 package JC001.entityImp;
 
 import JC001.entity.IEntity;
-import JC001.utilities.InputDataMethods;
-import jdk.internal.util.xml.impl.Input;
+import JC001.utilities.InputHandles;
 
 import java.time.Year;
 import java.util.*;
@@ -100,9 +99,9 @@ public class Book implements IEntity {
 
     public String inputBookId(Scanner scanner) {
         System.out.print("Please enter book id: ");
-        String bookId = InputDataMethods.inputString(scanner);
+        String bookId = InputHandles.inputString(scanner);
         while (!isValidateBookId(bookId) || isExistBookId(bookId))
-            bookId = InputDataMethods.inputString(scanner);
+            bookId = InputHandles.inputString(scanner);
         return bookId;
     }
 
@@ -126,9 +125,9 @@ public class Book implements IEntity {
 
     public String inputBookTitle(Scanner scanner) {
         System.out.print("Please enter book title: ");
-        String bookTitle = InputDataMethods.inputString(scanner);
+        String bookTitle = InputHandles.inputString(scanner);
         while (!isValidateBookTitle(bookTitle) || isExistBookTitle(bookTitle))
-            bookTitle = InputDataMethods.inputString(scanner);
+            bookTitle = InputHandles.inputString(scanner);
         return capitalieString(bookTitle);
     }
 
@@ -157,19 +156,19 @@ public class Book implements IEntity {
 
     public String inputAuthor(Scanner scanner) {
         System.out.print("Please enter author name: ");
-        return InputDataMethods.inputString(scanner);
+        return InputHandles.inputString(scanner);
     }
 
     public String inputPublisher(Scanner scanner) {
         System.out.print("Please enter publisher company name: ");
-        return InputDataMethods.inputString(scanner);
+        return InputHandles.inputString(scanner);
     }
 
     public int inputYear(Scanner scanner) {
         System.out.print("Please enter publish year: ");
-        int publishYear = InputDataMethods.inputInteger(scanner);
+        int publishYear = InputHandles.inputInteger(scanner);
         while (!isValidatePublishYear(publishYear))
-            publishYear = InputDataMethods.inputInteger(scanner);
+            publishYear = InputHandles.inputInteger(scanner);
         return publishYear;
     }
 
@@ -183,12 +182,14 @@ public class Book implements IEntity {
 
     public String inputDescription(Scanner scanner) {
         System.out.print("Please enter book 's description: ");
-        return InputDataMethods.inputString(scanner);
+        return InputHandles.inputString(scanner);
     }
 
     public int inputCategoryId(Scanner scanner) {
         System.out.print("Please enter book 's category id: ");
-        return InputDataMethods.inputInteger(scanner);
+        return InputHandles.inputInteger(scanner);
+        // Kiểm tra xem trong CategoryList có trường nào không.
+        // Nếu không có thì serr ra lỗi và quay lại.
     }
 
     @Override
@@ -207,5 +208,14 @@ public class Book implements IEntity {
                 ", descriptions='" + description + '\'' +
                 ", categoryId=" + categoryId +
                 '}';
+    }
+    public static int getNumberOfBooksByCategoryId(int categoryId){
+        Iterator<Book> bookIterator = booksList.iterator();
+        int count = 0;
+        while (bookIterator.hasNext()){
+            if(bookIterator.next().categoryId == categoryId)
+                count++;
+        }
+        return count;
     }
 }
