@@ -1,9 +1,10 @@
 package JC001.PresentationImp;
 
 import JC001.Presentation.IManagementMenu;
-import JC001.Utilities.InputHandles;
+import JC001.Utilities.CommonHandles;
 
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class LibraryManagementImp implements IManagementMenu {
     @Override
@@ -11,12 +12,12 @@ public class LibraryManagementImp implements IManagementMenu {
         boolean isExit = false;
         int choice;
         do {
-            System.out.print("===== LIBRARY MANAGEMENT =====\n" +
-                    "1. Category management.\n" +
-                    "2. Book management.\n" +
-                    "3. Exit.\n" +
-                    "Please enter your choice: ");
-            choice = InputHandles.inputInteger(scanner);
+            AtomicInteger menuIndex = new AtomicInteger(1);
+            System.out.println("===== LIBRARY MANAGEMENT =====");
+            System.out.println(menuIndex.getAndIncrement() + ". Category management.");
+            System.out.println(menuIndex.getAndIncrement() + ". Book management");
+            System.out.println(menuIndex.getAndIncrement() + ". Exit.");
+            choice = CommonHandles.choiceInteger(scanner);
             switch (choice){
                 case 1:
                     CategoryManagementImp categoryManagement = new CategoryManagementImp();

@@ -7,7 +7,7 @@ import JC001.Utilities.InputHandles;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class BookBusinessImp {
+public class BookBusiness extends DataManagerImp<Category>{
     public static void addNewBooks(Scanner scanner){
         System.out.print("Please enter n value to add new books: ");
         int n = InputHandles.inputInteger(scanner);

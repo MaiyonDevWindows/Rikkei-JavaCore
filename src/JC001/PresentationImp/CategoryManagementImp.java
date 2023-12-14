@@ -1,41 +1,43 @@
 package JC001.PresentationImp;
 
-import JC001.BusinessImp.CategoryBusinessImp;
+import JC001.BusinessImp.CategoryBusiness;
 import JC001.Presentation.IManagementMenu;
-import JC001.Utilities.InputHandles;
+import JC001.Utilities.CommonHandles;
 
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CategoryManagementImp implements IManagementMenu {
     @Override
     public void displayMenu(Scanner scanner) {
+        CategoryBusiness categoryBusiness = new CategoryBusiness();
         boolean isExit = false;
         int choice;
         do {
-            System.out.print("===== CATEGORY MANAGEMENT =====\n" +
-                    "1. Add new categories.\n" +
-                    "2. Display list categories by name (A – Z).\n" +
-                    "3. Statistics on book 's category and the number of books in each category.\n" +
-                    "4. Update category.\n" +
-                    "5. Delete category.\n" +
-                    "6. Back.\n" +
-                    "Please enter your choice: ");
-            choice = InputHandles.inputInteger(scanner);
+            AtomicInteger menuIndex = new AtomicInteger(1);
+            System.out.println("===== CATEGORY MANAGEMENT =====");
+            System.out.println(menuIndex.getAndIncrement() + ". Add new categories.");
+            System.out.println(menuIndex.getAndIncrement() + ". Display list categories by name (A – Z).");
+            System.out.println(menuIndex.getAndIncrement() + ". Statistics on book 's category and the number of books in each category.");
+            System.out.println(menuIndex.getAndIncrement() + ". Update category.");
+            System.out.println(menuIndex.getAndIncrement() + ". Delete category.");
+            System.out.println(menuIndex.getAndIncrement() + ". Back.");
+            choice = CommonHandles.choiceInteger(scanner);
             switch (choice){
                 case 1:
-                    CategoryBusinessImp.addNewCategories(scanner);
+                    categoryBusiness.addNewCategories(scanner);
                     break;
                 case 2:
-                    CategoryBusinessImp.displayAllCategories();
+                    categoryBusiness.displayAllCategories();
                     break;
                 case 3:
-                    CategoryBusinessImp.statisticsByEachCategory();
+                    CategoryBusiness.statisticsByEachCategory();
                     break;
                 case 4:
-                    CategoryBusinessImp.updateCategoryById(scanner);
+                    CategoryBusiness.updateCategoryById(scanner);
                     break;
                 case 5:
-                    CategoryBusinessImp.deleteCategoryById(scanner);
+                    CategoryBusiness.deleteCategoryById(scanner);
                     break;
                 case 6:
                     isExit = true;

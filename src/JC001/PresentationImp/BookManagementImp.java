@@ -1,10 +1,11 @@
 package JC001.PresentationImp;
 
-import JC001.BusinessImp.BookBusinessImp;
+import JC001.BusinessImp.BookBusiness;
 import JC001.Presentation.IManagementMenu;
-import JC001.Utilities.InputHandles;
+import JC001.Utilities.CommonHandles;
 
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class BookManagementImp implements IManagementMenu {
     @Override
@@ -12,36 +13,36 @@ public class BookManagementImp implements IManagementMenu {
         boolean isExit = false;
         int choice;
         do {
-            System.out.print("===== BOOK MANAGEMENT =====\n" +
-                    "1. Add new books.\n" +
-                    "2. Update book data.\n" +
-                    "3. Delete book by book id.\n" +
-                    "4. Find book by book name.\n" +
-                    "5. Display by book 's category.\n" +
-                    "6. Back.\n" +
-                    "Please enter your choice: ");
-            choice = InputHandles.inputInteger(scanner);
+            AtomicInteger menuIndex = new AtomicInteger(1);
+            System.out.println("===== BOOK MANAGEMENT =====");
+            System.out.println(menuIndex.getAndIncrement() + ". Add new books.");
+            System.out.println(menuIndex.getAndIncrement() + ". Update book data.");
+            System.out.println(menuIndex.getAndIncrement() + ". Delete book by book id.");
+            System.out.println(menuIndex.getAndIncrement() + ". Find book by book name.");
+            System.out.println(menuIndex.getAndIncrement() + ". Display by book 's category.");
+            System.out.println(menuIndex.getAndIncrement() + ". Back.");
+            choice = CommonHandles.choiceInteger(scanner);
             switch (choice){
                 case 1:
-                    BookBusinessImp.addNewBooks(scanner);
+                    BookBusiness.addNewBooks(scanner);
                     break;
                 case 2:
-                    BookBusinessImp.updateBookData(scanner);
+                    BookBusiness.updateBookData(scanner);
                     break;
                 case 3:
-                    // BookBusinessImp.deleteBookById(scanner);
+                    // BookBusiness.deleteBookById(scanner);
                     break;
                 case 4:
-                    // BookBusinessImp.findBookByBookName(scanner);
+                    // BookBusiness.findBookByBookName(scanner);
                     break;
                 case 5:
-                    // BookBusinessImp.displayBooksByCategory(scanner);
+                    // BookBusiness.displayBooksByCategory(scanner);
                     break;
                 case 6:
                     isExit = true;
                     break;
                 case 7:
-                    BookBusinessImp.displayAllBooks();
+                    BookBusiness.displayAllBooks();
                     break;
                 default:
                     System.err.println("You enter wrong choice value, please try again.");
