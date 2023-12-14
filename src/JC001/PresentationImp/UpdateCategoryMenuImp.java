@@ -1,11 +1,8 @@
-package JC001.presentationImp;
+package JC001.PresentationImp;
 
 import java.util.Scanner;
 
 public class UpdateCategoryMenuImp {
     public void displayMenu(Scanner scanner){
-        boolean isExit;
-        int choice;
-
     }
 }

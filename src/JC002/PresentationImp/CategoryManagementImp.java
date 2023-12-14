@@ -1,41 +1,36 @@
-package JC001.presentationImp;
+package JC002.PresentationImp;
 
-import JC001.businessImp.CategoryBusinessImp;
-import JC001.presentation.SystemPresentation;
-import JC001.utilities.InputHandles;
+import JC002.Presentation.IManagementMenu;
+import JC002.Utilities.InputHandles;
 
 import java.util.Scanner;
 
-public class CategoryManagementImp implements SystemPresentation {
+public class CategoryManagementImp implements IManagementMenu {
+
     @Override
     public void displayMenu(Scanner scanner) {
         boolean isExit = false;
         int choice;
         do {
             System.out.print("===== CATEGORY MANAGEMENT =====\n" +
-                    "1. Add new categories.\n" +
-                    "2. Display list categories by name (A – Z).\n" +
-                    "3. Statistics on book 's category and the number of books in each category.\n" +
-                    "4. Update category.\n" +
-                    "5. Delete category.\n" +
+                    "1. Add new categories .\n" +
+                    "2. Update category by id.\n" +
+                    "3. Delete category.\n" +
+                    "4. Find categories by category name.\n" +
+                    "5. Statistics the number of products by category.\n" +
                     "6. Back.\n" +
                     "Please enter your choice: ");
             choice = InputHandles.inputInteger(scanner);
             switch (choice){
                 case 1:
-                    CategoryBusinessImp.addNewCategories(scanner);
                     break;
                 case 2:
-                    CategoryBusinessImp.displayAllCategories();
                     break;
                 case 3:
-                    CategoryBusinessImp.statisticsByEachCategory();
                     break;
                 case 4:
-                    CategoryBusinessImp.updateCategoryById(scanner);
                     break;
                 case 5:
-                    CategoryBusinessImp.deleteCategoryById(scanner);
                     break;
                 case 6:
                     isExit = true;

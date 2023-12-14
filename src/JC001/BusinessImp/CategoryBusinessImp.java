@@ -1,8 +1,7 @@
-package JC001.businessImp;
+package JC001.BusinessImp;
 
-import JC001.entityImp.Category;
-import JC001.utilities.InputHandles;
-import jdk.internal.util.xml.impl.Input;
+import JC001.EntityImp.Category;
+import JC001.Utilities.InputHandles;
 
 import java.util.Comparator;
 import java.util.Iterator;

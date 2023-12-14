@@ -14,19 +14,19 @@ public class ShopBusiness {
             book.inputData(scanner);
             Book.booksList.add(book);
         }
-    };
+    }
     public static void displayBooksData(){
         System.out.print("Display all books data: ");
         for (Book book: Book.booksList) {
             book.displayData();
         }
-    };
+    }
     public static void updateBookById(Scanner scanner){
         System.out.print("Please enter book id to update element: ");
         int updateId = inputMethods.inputInteger(scanner);
         Book book = new Book();
         book.updateDataByBookId(scanner, updateId);
-    };
+    }
     public static void deleteBookById(Scanner scanner){
         System.out.print("Please enter book id to delete element: ");
         int delBookId = inputMethods.inputInteger(scanner);
@@ -39,10 +39,10 @@ public class ShopBusiness {
                         break;
                     }
         }
-    };
+    }
     public static void sortBooksByExportPriceAsc(){
         System.out.print("Sort book by export price asc");
-    };
+    }
     public static void countBooksByExportPriceRange(Scanner scanner){
         System.out.print("Please enter export price a: ");
         float aExportPrice = inputMethods.inputFloat(scanner);
@@ -52,8 +52,7 @@ public class ShopBusiness {
             if (book.getExportPrice() >= aExportPrice && book.getExportPrice() <= bExportPrice)
                 book.displayData();
         }
-
-    };
+    }
     public static void findBookByAuthorName(Scanner scanner){
         System.out.print("Please enter book author name to find: ");
         String authorName = scanner.nextLine();
@@ -61,5 +60,5 @@ public class ShopBusiness {
             if(book.getAuthor().equals(authorName))
                 book.displayData();
         }
-    };
+    }
 }

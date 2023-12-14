@@ -1,8 +1,8 @@
-package JC001.businessImp;
+package JC001.BusinessImp;
 
-import JC001.entityImp.Book;
-import JC001.entityImp.Category;
-import JC001.utilities.InputHandles;
+import JC001.EntityImp.Book;
+import JC001.EntityImp.Category;
+import JC001.Utilities.InputHandles;
 
 import java.util.Iterator;
 import java.util.Scanner;

@@ -1,4 +1,4 @@
-package JC001.utilities;
+package JC001.Utilities;
 
 import java.util.Scanner;
 
@@ -9,10 +9,10 @@ public class InputHandles {
             try {
                 inputInt = Integer.parseInt(scanner.nextLine());
                 return inputInt;
-            } catch (NumberFormatException ex) {
+            } catch (NumberFormatException e) {
                 System.err.println("Your value you entered must be integer, please try again.");
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } while (true);
     }
@@ -34,8 +34,8 @@ public class InputHandles {
                 return inputFloat;
             } catch (NumberFormatException ex) {
                 System.err.println("Your value you entered must be float, please try again.");
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } while (true);
     }

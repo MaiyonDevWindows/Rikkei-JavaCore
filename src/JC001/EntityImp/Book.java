@@ -1,7 +1,7 @@
-package JC001.entityImp;
+package JC001.EntityImp;
 
-import JC001.entity.IEntity;
-import JC001.utilities.InputHandles;
+import JC001.Entity.IEntity;
+import JC001.Utilities.InputHandles;
 
 import java.time.Year;
 import java.util.*;

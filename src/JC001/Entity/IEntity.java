@@ -1,4 +1,4 @@
-package JC001.entity;
+package JC001.Entity;
 
 import java.util.Scanner;
 

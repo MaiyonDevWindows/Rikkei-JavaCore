@@ -1,12 +1,12 @@
-package JC001.presentationImp;
+package JC001.PresentationImp;
 
-import JC001.businessImp.BookBusinessImp;
-import JC001.presentation.SystemPresentation;
-import JC001.utilities.InputHandles;
+import JC001.BusinessImp.BookBusinessImp;
+import JC001.Presentation.IManagementMenu;
+import JC001.Utilities.InputHandles;
 
 import java.util.Scanner;
 
-public class BookManagement implements SystemPresentation {
+public class BookManagementImp implements IManagementMenu {
     @Override
     public void displayMenu(Scanner scanner) {
         boolean isExit = false;

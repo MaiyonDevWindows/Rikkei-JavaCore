@@ -1,30 +1,31 @@
-package JC001.presentationImp;
+package JC002.PresentationImp;
 
-import JC001.presentation.SystemPresentation;
-import JC001.utilities.InputHandles;
+import JC002.Utilities.InputHandles;
+import JC002.Presentation.IManagementMenu;
 
 import java.util.Scanner;
 
-public class LibraryManagementImp implements SystemPresentation {
+public class StoreManagementImp implements IManagementMenu {
+
     @Override
-    public void displayMenu(Scanner scanner){
+    public void displayMenu(Scanner scanner) {
         boolean isExit = false;
         int choice;
         do {
-            System.out.print("===== LIBRARY MANAGEMENT =====\n" +
+            System.out.print("===== STORE MANAGEMENT =====\n" +
                     "1. Category management.\n" +
-                    "2. Book management.\n" +
+                    "2. Product management.\n" +
                     "3. Exit.\n" +
                     "Please enter your choice: ");
             choice = InputHandles.inputInteger(scanner);
             switch (choice){
                 case 1:
-                    CategoryManagementImp categoryManagementImp = new CategoryManagementImp();
-                    categoryManagementImp.displayMenu(scanner);
+                    CategoryManagementImp categoryManagement = new CategoryManagementImp();
+                    categoryManagement.displayMenu(scanner);
                     break;
                 case 2:
-                    BookManagement bookManagement = new BookManagement();
-                    bookManagement.displayMenu(scanner);
+                    ProductManagementImp productManagement = new ProductManagementImp();
+                    productManagement.displayMenu(scanner);
                     break;
                 case 3:
                     isExit = true;
