@@ -14,13 +14,11 @@ public class BookManagementImp implements IManagementMenu {
     public void displayMenu(Scanner scanner) {
         CategoryBusiness categoryBusiness = new CategoryBusiness();
         BookBusiness bookBusiness = new BookBusiness();
-
         boolean isExit = false;
         int choice;
         do {
             bookBusiness.readDataFromFile(DataFilePaths.booksDataFile);
             categoryBusiness.readDataFromFile(DataFilePaths.categoriesDataFile);
-
             AtomicInteger menuIndex = new AtomicInteger(1);
             System.out.println("===== BOOK MANAGEMENT =====");
             System.out.println(menuIndex.getAndIncrement() + ". Add new books.");

@@ -244,7 +244,4 @@ public class Book implements IEntity, Serializable {
     public static void printTableFooterWithBoundary() {
         printHorizontalLineWithBoundary();
     }
-    public void printCategoryDataRow() {
-        printTableRowWithBoundaryAndId();
-    }
 }
