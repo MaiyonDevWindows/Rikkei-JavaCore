@@ -1,8 +1,10 @@
 package JC001.PresentationImp;
 
+import JC001.BusinessImp.BookBusiness;
 import JC001.BusinessImp.CategoryBusiness;
 import JC001.Presentation.IManagementMenu;
 import JC001.Utilities.CommonHandles;
+import JC001.Utilities.DataFilePaths;
 
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -11,9 +13,12 @@ public class CategoryManagementImp implements IManagementMenu {
     @Override
     public void displayMenu(Scanner scanner) {
         CategoryBusiness categoryBusiness = new CategoryBusiness();
+        BookBusiness bookBusiness = new BookBusiness();
         boolean isExit = false;
         int choice;
         do {
+            categoryBusiness.readDataFromFile(DataFilePaths.categoriesDataFile);
+            bookBusiness.readDataFromFile(DataFilePaths.booksDataFile);
             AtomicInteger menuIndex = new AtomicInteger(1);
             System.out.println("===== CATEGORY MANAGEMENT =====");
             System.out.println(menuIndex.getAndIncrement() + ". Add new categories.");
@@ -26,18 +31,20 @@ public class CategoryManagementImp implements IManagementMenu {
             switch (choice){
                 case 1:
                     categoryBusiness.addNewCategories(scanner);
+                    categoryBusiness.writeDataToFile(DataFilePaths.categoriesDataFile);
                     break;
                 case 2:
                     categoryBusiness.displayAllCategories();
                     break;
                 case 3:
-                    CategoryBusiness.statisticsByEachCategory();
+                    categoryBusiness.statisticsByEachCategory(bookBusiness);
                     break;
                 case 4:
-                    CategoryBusiness.updateCategoryById(scanner);
+                    categoryBusiness.updateCategoryById(categoryBusiness, scanner);
                     break;
                 case 5:
-                    CategoryBusiness.deleteCategoryById(scanner);
+                    categoryBusiness.deleteCategoryById(scanner);
+                    categoryBusiness.writeDataToFile(DataFilePaths.categoriesDataFile);
                     break;
                 case 6:
                     isExit = true;

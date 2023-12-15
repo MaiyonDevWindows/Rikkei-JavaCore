@@ -1,20 +1,23 @@
 package JC001.EntityImp;
 
+import JC001.BusinessImp.BookBusiness;
 import JC001.Entity.IEntity;
 import JC001.Utilities.InputHandles;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Scanner;
 
-public class Category implements IEntity {
-    public static List<Category> categoriesList = new ArrayList<Category>();
+public class Category implements IEntity, Serializable {
+    private List<Category> categoryList;
     private int categoryId;
     private String categoryName;
     private boolean categoryStatus;
 
     public Category() {
+    }
+    public Category(List<Category> categoryList){
+        this.categoryList = categoryList;
     }
 
     public Category(int categoryId, String categoryName, boolean categoryStatus) {
@@ -55,21 +58,13 @@ public class Category implements IEntity {
     }
     public int generateCategoryId(){
         int maxCategoryId = 0;
-        if(!categoriesList.isEmpty()){
-            for (Category category : categoriesList) {
+        if(!categoryList.isEmpty()){
+            for (Category category : categoryList) {
                 if (category.getCategoryId() > maxCategoryId)
                     maxCategoryId = category.getCategoryId();
             }
         }
         return maxCategoryId + 1;
-    }
-    public static boolean isExistCategoryId(int categoryId){
-        Iterator<Category> categoryIterator = categoriesList.iterator();
-        while (categoryIterator.hasNext()){
-            if(categoryIterator.next().getCategoryId() == categoryId)
-                return true;
-        }
-        return false;
     }
     public String inputCategoryName(Scanner scanner){
         System.out.print("Please enter category name: ");
@@ -86,10 +81,16 @@ public class Category implements IEntity {
         }
         return true;
     }
+    public boolean isExistCategoryId(int categoryId){
+        for (Category category : categoryList) {
+            if (category.getCategoryId() == categoryId)
+                return true;
+        }
+        return false;
+    }
     public boolean isExistCategoryName(String categoryName){
-        Iterator<Category> categoryIterator = categoriesList.iterator();
-        while (categoryIterator.hasNext()){
-            if (categoryIterator.next().getCategoryName().equals(categoryName)){
+        for (Category category : categoryList) {
+            if (category.getCategoryName().equals(categoryName)) {
                 System.err.println("Your category name is exist, please enter another category name value!");
                 return true;
             }
@@ -118,11 +119,29 @@ public class Category implements IEntity {
                 ", categoryStatus=" + categoryStatus +
                 '}';
     }
-    public String statisticsNumberOfBooksByCategory(){
-        return "Category{" +
-                "categoryId=" + categoryId +
-                ", categoryName='" + categoryName + '\'' +
-                ", numberOfBooks=" + Book.getNumberOfBooksByCategoryId(categoryId) +
-                '}';
+    public void statisticsNumberOfBooksByCategory(BookBusiness bookBusiness){
+        Book book = new Book(bookBusiness.getDataList());
+        System.out.printf("| %-15s | %-20s | %-15s |%n",
+                this.categoryId, this.categoryName, book.getNumberOfBooksByCategoryId(categoryId));
+    }
+    public static void printHorizontalLineWithBoundary() {
+        System.out.println("+-----------------+----------------------+-----------------+");
+    }
+    public static void printTableHeaderWithBoundaryAndId() {
+        printHorizontalLineWithBoundary();
+        System.out.printf("| %-15s | %-20s | %-15s |%n", "Category id", "Category name","Status");
+        printHorizontalLineWithBoundary();
+    }
+    public static void printTableHeaderWithBoundaryAndIdStatistics() {
+        printHorizontalLineWithBoundary();
+        System.out.printf("| %-15s | %-20s | %-15s |%n", "Category id", "Category name","Number of books");
+        printHorizontalLineWithBoundary();
+    }
+    public void printTableRowWithBoundaryAndId() {
+        System.out.printf("| %-15s | %-20s | %-15s |%n",
+                this.categoryId, this.categoryName, this.categoryStatus ? "Available" : "Unavailable");
+    }
+    public static void printTableFooterWithBoundary() {
+        printHorizontalLineWithBoundary();
     }
 }

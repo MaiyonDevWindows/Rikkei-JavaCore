@@ -10,7 +10,7 @@ public class DataManagerImp<T> implements DataManager<T> {
     protected List<T> dataList;
 
     public DataManagerImp() {
-        dataList = new ArrayList<>();
+        this.dataList = new ArrayList<>();
     }
 
     @Override

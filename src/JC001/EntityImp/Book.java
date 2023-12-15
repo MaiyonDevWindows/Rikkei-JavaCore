@@ -1,14 +1,18 @@
 package JC001.EntityImp;
 
+import JC001.BusinessImp.BookBusiness;
+import JC001.BusinessImp.CategoryBusiness;
 import JC001.Entity.IEntity;
 import JC001.Utilities.InputHandles;
 
+import java.io.Serializable;
 import java.time.Year;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
-public class Book implements IEntity {
-    public static List<Book> booksList = new ArrayList<>();
+public class Book implements IEntity, Serializable {
+    private List<Book> bookList;
     private String bookId;
     private String bookTitle;
     private String author;
@@ -18,6 +22,9 @@ public class Book implements IEntity {
     private int categoryId;
 
     public Book() {
+    }
+    public Book(List<Book> bookList){
+        this.bookList = bookList;
     }
 
     public Book(String bookId, String bookTitle, String author, String publisher, int year, String description, int categoryId) {
@@ -114,9 +121,8 @@ public class Book implements IEntity {
     }
 
     public boolean isExistBookId(String bookId) {
-        Iterator<Book> bookIterator = booksList.iterator();
-        while (bookIterator.hasNext())
-            if (bookIterator.next().bookId.equals(bookId)) {
+        for (Book book : bookList)
+            if (book.bookId.equals(bookId)) {
                 System.err.println("Your book id is exist, please enter another book id value!");
                 return true;
             }
@@ -145,9 +151,8 @@ public class Book implements IEntity {
     }
 
     public boolean isExistBookTitle(String bookTitle) {
-        Iterator<Book> bookIterator = booksList.iterator();
-        while (bookIterator.hasNext())
-            if (bookIterator.next().bookTitle.equals(bookTitle)) {
+        for (Book book : bookList)
+            if (book.bookTitle.equals(bookTitle)) {
                 System.err.println("Your book title is exist, please enter another book title value!");
                 return true;
             }
@@ -186,10 +191,25 @@ public class Book implements IEntity {
     }
 
     public int inputCategoryId(Scanner scanner) {
+        CategoryBusiness categoryBusiness = new CategoryBusiness();
+        categoryBusiness.readDataFromFile("categories.txt");
+        categoryBusiness.displayAllCategories();
         System.out.print("Please enter book 's category id: ");
-        return InputHandles.inputInteger(scanner);
+        int categoryId = InputHandles.inputInteger(scanner);
         // Kiểm tra xem trong CategoryList có trường nào không.
-        // Nếu không có thì serr ra lỗi và quay lại.
+        while(!categoryBusiness.isExistCategoryId(categoryId)){
+            // Nếu không có thì serr ra lỗi và quay lại.
+            System.err.println("Your category id is not exist, please try again.");
+            categoryId = InputHandles.inputInteger(scanner);
+        }
+        return categoryId;
+    }
+    public int getNumberOfBooksByCategoryId(int categoryId){
+        AtomicInteger count = new AtomicInteger();
+        bookList.forEach(element -> {
+            if(element.categoryId == categoryId) count.getAndIncrement();
+        });
+        return count.get();
     }
 
     @Override
@@ -209,13 +229,19 @@ public class Book implements IEntity {
                 ", categoryId=" + categoryId +
                 '}';
     }
-    public static int getNumberOfBooksByCategoryId(int categoryId){
-        Iterator<Book> bookIterator = booksList.iterator();
-        int count = 0;
-        while (bookIterator.hasNext()){
-            if(bookIterator.next().categoryId == categoryId)
-                count++;
-        }
-        return count;
+    public static void printHorizontalLineWithBoundary() {
+        System.out.println("+-----------------+-----------------+-----------------+-----------------+-----------------+----------------------+----------------------+");
+    }
+    public static void printTableHeaderWithBoundaryAndId() {
+        printHorizontalLineWithBoundary();
+        System.out.printf("| %-15s | %-15s | %-15s | %-15s | %-15s | %-20s | %-20s |%n", "Book id", "Book title","Author", "Publisher", "Year", "Description", "Category");
+        printHorizontalLineWithBoundary();
+    }
+    public void printTableRowWithBoundaryAndId() {
+        System.out.printf("| %-15s | %-15s | %-15s | %-15s | %-15s | %-20s | %-20s |%n",
+                bookId, bookTitle, author, publisher, year, description, categoryId);
+    }
+    public static void printTableFooterWithBoundary() {
+        printHorizontalLineWithBoundary();
     }
 }
