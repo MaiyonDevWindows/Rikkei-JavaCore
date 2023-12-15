@@ -1,5 +1,7 @@
 package JC001.Entity;
 
+
+import java.util.List;
 import java.util.Scanner;
 
 public interface IEntity {
