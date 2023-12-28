@@ -9,5 +9,6 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         WarehouseManagement warehouseManagement = new WarehouseManagement();
         warehouseManagement.displayAdminMenu(scanner);
+        System.exit(0);
     }
 }
