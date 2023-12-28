@@ -100,9 +100,9 @@ SELECT st.gender, AVG(st.age) AS 'Tuổi trung bình'
             HAVING AVG(st.age) > 23;
 -- 23. ORDER BY: Lấy thông tin sinh viên theo tuổi tăng dần.
 SELECT * FROM student st
-    ORDER BY st.age ASC;
+    ORDER BY st.age;
 -- 24. Lấy thông tin sinh viên theo tuổi tăng dần
 -- tuổi bằng nhau thì theo tên giảm dần.
 SELECT * FROM student st
-    ORDER BY st.age ASC, st.student_name DESC;
+    ORDER BY st.age, st.student_name DESC;
 -- 25. Câu lệnh truy vấn lồng.
