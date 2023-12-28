@@ -36,7 +36,7 @@ alter table student drop column email;
 -- Thêm constraint cho 1 cột.
 alter table student add constraint student_unique_name unique(student_name);
 -- Xoá constraint cho 1 cột.
-alter table student drop constraint student_unique_name;
+-- alter table student drop constraint student_unique_name;
 
 -- Lesson 3: MySQL Query.
 -- Thêm 1 sinh viên đầy đủ các thông tin.
