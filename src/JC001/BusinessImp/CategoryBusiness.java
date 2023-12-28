@@ -1,11 +1,14 @@
 package JC001.BusinessImp;
 
+import JC001.EntityImp.Book;
 import JC001.EntityImp.Category;
 import JC001.PresentationImp.UpdateCategoryMenuImp;
+import JC001.Utilities.DataFilePaths;
 import JC001.Utilities.InputHandles;
 import JC001.Utilities.OutputHandles;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 public class CategoryBusiness extends DataManagerImp<Category>{
@@ -76,8 +79,22 @@ public class CategoryBusiness extends DataManagerImp<Category>{
         if (isExistCategoryId(categoryDeleteId)){
             System.out.print(OutputHandles.stringWarning("Are you sure want to delete (Yes/No): "));
             if(InputHandles.inputConfirmValue(scanner)){
-                dataList.removeIf(category -> category.getCategoryId() == categoryDeleteId);
-                System.out.println(OutputHandles.stringSuccess("Delete category successfully!"));
+                BookBusiness bookBusiness = new BookBusiness();
+                bookBusiness.readDataFromFile(DataFilePaths.booksDataFile);
+                List<Book> bookList = bookBusiness.getDataList();
+                boolean canDel = true;
+                for(Book book : bookList){
+                    if(book.getCategoryId() == categoryDeleteId){
+                        canDel = false;
+                        break;
+                    }
+                }
+                if(canDel){
+                    dataList.removeIf(category -> category.getCategoryId() == categoryDeleteId);
+                    System.out.println(OutputHandles.stringSuccess("Delete category successfully!"));
+                }else{
+                    System.err.println("Category has books, can not delete category.");
+                }
             }
         }else System.err.println("Can not delete element cause category id is not exist!");
     }
