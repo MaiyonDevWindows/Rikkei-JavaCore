@@ -50,15 +50,4 @@ public class BookBusiness extends DataManagerImp<Book>{
         }
         Book.printTableFooterWithBoundary();
     }
-//    public void updateBookData(Scanner scanner){
-//        System.out.print("Please enter book id to update data: ");
-//        String updateBookId = InputHandles.inputString(scanner);
-//        int updateBookIndex = 0;
-//        Iterator<Book> bookIterator = Book.booksList.iterator();
-//        while (bookIterator.hasNext()){
-//            updateBookIndex++;
-//            if(bookIterator.next().getBookId().equals(updateBookId))
-//                break;
-//        }
-//    }
 }
