@@ -7,27 +7,24 @@ create procedure if not exists addNewProduct(
     ProductId char(5),
     ProductName varchar(150),
     ManufacturerValue varchar(150),
-    CreatedDate DATE,
+    in CreatedDate DATE,
     BatchValue smallint,
-    QuantityValue int,
-    ProductStatus bit
+    in QuantityValue int,
+    in ProductStatus bit
 )
 begin
     if CreatedDate is null
-        then set @InsertDate = DATE(CURRENT_DATE);
-    else set @InsertDate = CreatedDate;
+        then set CreatedDate = DATE(CURRENT_DATE);
     end if;
     if QuantityValue is null
-        then set @InsertQuantity = 0;
-    else set @InsertQuantity = QuantityValue;
+        then set QuantityValue = 0;
     end if;
     if ProductStatus is null
-        then set @InsertStatus = 1;
-    else set @InsertStatus = ProductStatus;
+        then set ProductStatus = 1;
     end if;
     insert into product
     values (ProductId, ProductName, ManufacturerValue,
-            @InsertDate, BatchValue, @InsertQuantity, @InsertStatus);
+            CreatedDate, BatchValue, QuantityValue, ProductStatus);
 end &&
 
 -- Test add new product.
@@ -64,18 +61,16 @@ create procedure if not exists addNewAccount(
     AccountId int,
     UName varchar(30),
     Pwd varchar(30),
-    PermissionValue bit,
+    in PermissionValue bit,
     EmployeeId char(5),
-    AccountStatus bit
+    in AccountStatus bit
 )
 begin
     if PermissionValue is null
-        then set @InsertPermission = 1;
-    else set @InsertPermission = PermissionValue;
+        then set PermissionValue = 1;
     end if;
     if AccountStatus is null
-        then set @InsertStatus = 1;
-    else set @InsertStatus = AccountStatus;
+        then set AccountStatus = 1;
     end if;
     insert into account values (AccountId, UName, Pwd, @InsertPermission, EmployeeId, @InsertStatus);
 end &&
@@ -100,8 +95,7 @@ create procedure if not exists addNewBill(
 )
 begin
     if BillStatus is null
-        then set @InsertStatus = 0;
-    else set @InsertStatus = BillStatus;
+        then set BillStatus = 0;
     end if;
     insert into bill
         values (BillId, BillCode, BillType, EmployeeIdCreated, CreatedDate,
