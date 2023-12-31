@@ -4,19 +4,18 @@
 // ToDo: tạo tables, sử dụng cú pháp 'drop if exists' & 'create if not exists' để có thể chạy lại db bất cứ lúc nào.
 // ToDo: tạo các khoá ngoại, cú pháp 'fk_tableName_pkName' để có thể dễ xoá, không cần 'if exists' vì xoá table là mất.
 // ToDo: phân chia cấu trúc thành nhiều file MySQL, mỗi file thực hiện một loại chức năng.
+// ToDo: viết các procedure MySql CRUD cho các thực thể.
 // ToDo: - Backend.
 // ToDo: phân chia cấu trúc folder Project.
 // ToDo: tạo interface, class UI cho Menu => Presentation, PresentationImp.
 // ToDo: code & test DbConnection.
 // To do list.
 // ToDo: - Database.
-// ToDo: viết các procedure MySql CRUD cho các thực thể.
 // ToDo: Read - getAll, getItemById, find (tìm kiếm tuyệt đối), searchFor(tìm kiếm tương đối).
 // ToDo: Create - insert.
 // ToDo: Update - update.
 // ToDo: Delete - delete.
 // ToDo: viết các procedure validate MySql.
-
 // ToDo: - Backend.
 // ToDo: tạo folder Entity chứa interface, class của các thực thể.
 // ToDo: + làm chức năng đăng nhập cho Project.

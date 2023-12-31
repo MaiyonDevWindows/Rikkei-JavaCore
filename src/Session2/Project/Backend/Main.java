@@ -9,6 +9,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         WarehouseManagement warehouseManagement = new WarehouseManagement();
         warehouseManagement.displayAdminMenu(scanner);
+        System.out.println("End program.");
         System.exit(0);
     }
 }

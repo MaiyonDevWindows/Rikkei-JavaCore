@@ -8,10 +8,10 @@ create table if not exists product
     product_id     char(5) primary key,
     product_name   varchar(150) not null unique,
     manufacturer   varchar(150) not null,
-    created        DATE,
+    created        DATE default null,
     batch          smallint     not null,
-    quantity       int default (0),
-    product_status bit default (1)
+    quantity       int default (0) null,
+    product_status bit default (1) null
 );
 
 drop table if exists employee;
@@ -19,7 +19,7 @@ create table if not exists employee
 (
     emp_id       char(5) primary key,
     emp_name     varchar(100) not null unique,
-    birth_of_day date,
+    birth_of_day date null,
     email        varchar(100) not null,
     phone        varchar(100) not null,
     address      text         not null,
@@ -32,9 +32,9 @@ create table if not exists account
     acc_id     int auto_increment primary key,
     user_name  varchar(30) not null unique,
     password   varchar(30) not null,
-    permission bit default (1),
+    permission bit default (1) null,
     emp_id     char(5)     not null unique,
-    acc_status bit default (1)
+    acc_status bit default (1) null
 );
 alter table account
     add constraint fk_account_emp_id
@@ -47,9 +47,9 @@ create table if not exists bill
     bill_code      varchar(10) not null,
     bill_type      bit         not null,
     emp_id_created char(5)     not null,
-    created        DATE,
-    emp_id_auth    char(5),
-    auth_date      DATE,
+    created        date null,
+    emp_id_auth    char(5) not null,
+    auth_date      date null,
     bill_status    smallint    not null default (0)
 );
 alter table bill
@@ -65,7 +65,6 @@ create table if not exists bill_detail
     bill_detail_id bigint primary key auto_increment,
     bill_id        bigint    not null,
     product_id     char(5) not null,
-    foreign key (product_id) references Product (product_id),
     quantity       int     not null check ( quantity > 0 ),
     price          float   not null check ( price > 0 )
 );
