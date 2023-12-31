@@ -126,6 +126,8 @@ create procedure if not exists addNewBillDetail(
 )
 begin
     insert into bill_detail
-        values (BillDetailId, BillId, ProductId, QuantityValue, Pricdelete from bill_detail where true;
+        values (BillDetailId, BillId, ProductId, QuantityValue, PriceValue);
+end &&
+delete from bill_detail where true;
 call addNewBillDetail(1, 1, 'P0001', 10, 50);
 select * from bill_detail;
