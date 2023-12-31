@@ -1,0 +1,33 @@
+Chuyển từ mô hình ER sang mô hình dữ liệu quan hệ.
+Bước 1: Xác định các thực thể có trong mô hình ERD.
+    - Vật tư: thực thể mạnh.
+    - Nhà cung cấp: thực thể mạnh.
+    - Đơn đặt hàng: thực thể mạnh.
+    - Phiếu xuất: thực thể mạnh.
+    - Phiếu nhập: thực thể mạnh.
+    - Chi tiết phiếu nhập: thực thể yếu.
+    - Chi tiết phiếu xuất: thực thể yếu.
+    - Chi tiết đơn đặt hàng: thực thể yếu.
+    - Cung cấp: thực thể yếu.
+Bước 2: Xác định các mối quan hệ 1 - 1, 1 - N, N - M.
+Bước 3: Xác định các thuộc tính đa trị tạo thành bảng mới.
+    - Sđt của nhà cung cấp => bảng cung cấp.
+        - Mã nhà cung cấp.
+        - Số điện thoại.
+Bước 4: Liệt kê các bảng sau khi chuyển đổi xong.
+- Bảng vật tư:
+    - Mã vật tư.
+    - Tên vật tư.
+- Bảng nhà cung cấp:
+    - Mã nhà cung cấp.
+    - Tên nhà cung cấp.
+    - Địa chỉ.
+- Bảng cung cấp:
+    - Mã nhà cung cấp (ref).
+    - Số điện thoại.
+- Bảng phiếu nhập:
+- Bảng phiếu xuất:
+- Bảng chi tiết phiếu nhập:
+- Bảng chi tiết phiếu xuất:
+- Bảng đơn đặt hàng:
+- Bảng chi tiết đơn đặt hàng:
