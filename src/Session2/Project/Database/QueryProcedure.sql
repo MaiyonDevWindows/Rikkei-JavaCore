@@ -1,4 +1,5 @@
 use Project_Management;
+
 -- Product table.
 delimiter &&
 drop procedure if exists getAllProducts;
@@ -75,7 +76,18 @@ begin
     from account
     where user_name = Username;
 end &&
-call getAccountByUName('Admin');
+
+delimiter &&
+drop procedure if exists getAccountByUnameNPwd;
+create procedure if not exists getAccountByUnameNPwd(
+    UName varchar(30),
+    Pwd varchar(30)
+)
+begin
+    select acc_id, user_name, password, permission, emp_id, acc_status
+    from account
+    where BINARY(user_name) = BINARY(UName) and BINARY(password) = BINARY(Pwd);
+end &&
 
 -- bill.
 delimiter &&
@@ -120,3 +132,63 @@ begin
     where bill_id = BillDetailId;
 end &&
 call getBillDetailById('1');
+
+
+
+-- Login account.
+-- Check account exists.
+delimiter &&
+drop procedure if exists checkAccountExists;
+create procedure if not exists checkAccountExists(
+    uname varchar(30),
+    pwd varchar(30),
+    out result boolean
+)
+begin
+    if (select count(*) from account where user_name = uname and password = pwd)
+        then set result = true;
+    else set result = false;
+    end if;
+end &&
+-- Check account status (active/inactive).
+delimiter &&
+drop procedure if exists checkAccountStatus;
+create procedure if not exists checkAccountStatus(
+    uname varchar(30),
+    out result boolean
+)
+begin
+    if (select acc_status from account where user_name = uname)
+        then set result = true;
+    else set result = false;
+    end if;
+end &&
+
+-- Check account permission (user/admin).
+delimiter &&
+drop procedure if exists checkAccountPermission;
+create procedure if not exists checkAccountPermission(
+    uname varchar(30),
+    out result boolean
+)
+begin
+    if (select permission from account where user_name = uname)
+        then set result = true;
+    else set result = false;
+    end if;
+end &&
+
+delete from bill_detail where true;
+delete from bill where true;
+delete from product where true;
+delete from account where true;
+delete from employee where true;
+-- Samples data
+insert into employee (emp_id, emp_name, birth_of_day, email, phone, address, emp_status)
+    values ('E0001', 'Nguyễn Hồng Quân', '1999-10-02', 'maiyonaisu1102@gmail.com', '0822206919', 'something', 0),
+    ('E0002', 'Nguyễn Văn A', '2002-10-02', 'nva0210@gmail.com', '0913052666', 'something', 0),
+    ('E0003', 'Nguyễn Văn B', '2002-10-03', 'nvb0210@gmail.com', '0913052789', 'something', 0);
+insert into account (acc_id, user_name, password, permission, emp_id, acc_status)
+    values (1, 'Admin', 'Admin', 0, 'E0001', 1),
+    (2, 'user_normal', '123456', 1, 'E0002', 1),
+    (3, 'user_blocked', '123456', 1, 'E0003', 0);

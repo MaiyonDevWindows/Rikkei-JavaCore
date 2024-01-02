@@ -1,6 +1,6 @@
-package Session2.Project.Backend.PresentationImp;
+package Session2.Project.Backend.Presentation;
 
-import Session2.Project.Backend.Presentation.IManagement;
+import Session2.Project.Backend.Utilities.CommonHandles;
 
 import java.util.Scanner;
 
@@ -10,15 +10,16 @@ public class ProductManagement implements IManagement {
         boolean isExit = false;
         int choice;
         do {
-            System.out.println("""
-                    ******************PRODUCT MANAGEMENT****************
+            System.out.print("""
+                    |===============PRODUCT MANAGEMENT===============|
                     1. Display all products data.
                     2. Add new products.
                     3. Update product data.
                     4. Search for products.
                     5. Change product status.
-                    6. Back.""");
-            choice = Integer.parseInt(scanner.nextLine());
+                    6. Back.
+                    """);
+            choice = CommonHandles.inputChoice(scanner);
             switch (choice){
                 case 1: break;
                 case 2: break;

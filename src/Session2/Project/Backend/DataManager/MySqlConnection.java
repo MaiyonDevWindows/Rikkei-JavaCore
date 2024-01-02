@@ -1,16 +1,17 @@
-package Session2.Project.Backend.Utilities;
+package Session2.Project.Backend.DataManager;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DbConnection {
+public class MySqlConnection implements DbConnection{
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL = "jdbc:mysql://localhost:3306/Project_Management";
     private static final String USERNAME = "root";
-    private static final String PASSWORD = "S0meth!ng976431";
+    private static final String PASSWORD = "root";
 
-    public static Connection openConnection(){
+    @Override
+    public Connection openConnection(){
         Connection connection = null;   // Khai báo biến connection.
         try {
             Class.forName(DRIVER);
@@ -22,7 +23,8 @@ public class DbConnection {
         }
         return connection;
     }
-    public static void closeConnection(Connection connection){
+    @Override
+    public void closeConnection(Connection connection){
         if(connection != null){
             try {
                 connection.close();
@@ -32,15 +34,5 @@ public class DbConnection {
                 e.printStackTrace();
             }
         }
-    }
-    public static void main(String[] args) {
-        // Test db connection.
-        Connection conn = DbConnection.openConnection();
-        if(conn != null){
-            System.out.println("Connect database successfullly.");
-        }else{
-            System.err.println("Error!");
-        }
-        DbConnection.closeConnection(conn);
     }
 }

@@ -1,6 +1,6 @@
-package Session2.Project.Backend.PresentationImp;
+package Session2.Project.Backend.Presentation;
 
-import Session2.Project.Backend.Presentation.IManagement;
+import Session2.Project.Backend.Utilities.CommonHandles;
 
 import java.util.Scanner;
 
@@ -10,8 +10,8 @@ public class ReportManagement implements IManagement {
         boolean isExit = false;
         int choice;
         do {
-            System.out.println("""
-                    ******************REPORT MANAGEMENT****************
+            System.out.print("""
+                    |===============REPORT MANAGEMENT===============|
                     1. Cost statistics by day, month, year.
                     2. Cost statistics by time period.
                     3. Revenue statistics by day, month, year.
@@ -21,8 +21,9 @@ public class ReportManagement implements IManagement {
                     7. Statistics on imported products at least over a period of time.
                     8. Statistics of products produced the most in a period of time.
                     9. Statistics on products produced at least over a period of time.
-                    10. Back.""");
-            choice = Integer.parseInt(scanner.nextLine());
+                    10. Back.
+                    """);
+            choice = CommonHandles.inputChoice(scanner);
             switch (choice){
                 case 1: break;
                 case 2: break;

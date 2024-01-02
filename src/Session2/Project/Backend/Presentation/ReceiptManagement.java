@@ -1,6 +1,6 @@
-package Session2.Project.Backend.PresentationImp;
+package Session2.Project.Backend.Presentation;
 
-import Session2.Project.Backend.Presentation.IManagement;
+import Session2.Project.Backend.Utilities.CommonHandles;
 
 import java.util.Scanner;
 
@@ -10,16 +10,17 @@ public class ReceiptManagement implements IManagement {
         boolean isExit = false;
         int choice;
         do {
-            System.out.println("""
-                    ******************RECEIPT MANAGEMENT****************
+            System.out.print("""
+                    |===============RECEIPT MANAGEMENT===============|
                     1. List of Receipt
                     2. Insert Receipt
                     3. Update Receipt Information
                     4. Receipt Detail
                     5. Approve Receipt
                     6. Find Receipt
-                    7. Back.""");
-            choice = Integer.parseInt(scanner.nextLine());
+                    7. Back.
+                    """);
+            choice = CommonHandles.inputChoice(scanner);
             switch (choice){
                 case 1: break;
                 case 2: break;

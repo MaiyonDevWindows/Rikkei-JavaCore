@@ -1,6 +1,6 @@
-package Session2.Project.Backend.PresentationImp;
+package Session2.Project.Backend.Presentation;
 
-import Session2.Project.Backend.Presentation.IManagement;
+import Session2.Project.Backend.Utilities.CommonHandles;
 
 import java.util.Scanner;
 
@@ -10,13 +10,15 @@ public class AccountManagement implements IManagement {
         boolean isExit = false;
         int choice;
         do {
-            System.out.println("******************ACCOUNT MANAGEMENT****************\n" +
-                    "1. Display all accounts data.\n" +
-                    "2. Create new accounts.\n" +
-                    "3. Change account status.\n" +
-                    "4. Search for accounts.\n" +
-                    "5. Back.");
-            choice = Integer.parseInt(scanner.nextLine());
+            System.out.print("""
+                    |===============ACCOUNT MANAGEMENT===============|
+                    1. Display all accounts data.
+                    2. Create new accounts.
+                    3. Change account status.
+                    4. Search for accounts.
+                    5. Back.
+                    """);
+            choice = CommonHandles.inputChoice(scanner);
             switch (choice){
                 case 1: break;
                 case 2: break;

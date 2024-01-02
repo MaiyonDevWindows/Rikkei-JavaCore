@@ -1,5 +1,7 @@
 use Project_Management;
 
+-- Viết thêm function tạo default value.
+
 -- Add new product.
 delimiter &&
 drop procedure if exists addNewProduct;
