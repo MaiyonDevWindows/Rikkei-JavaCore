@@ -5,6 +5,20 @@ import Session2.Project.Backend.Utilities.CommonHandles;
 import java.util.Scanner;
 
 public class AdminPresentation implements IManagement {
+    private IManagement productManagement;
+    private IManagement employeeManagement;
+    private IManagement accountManagement;
+    private IManagement receiptManagement;
+    private IManagement billManagement;
+    private IManagement reportManagement;
+    AdminPresentation(){
+        productManagement = new ProductPresentation();
+        employeeManagement = new EmployeeManagement();
+        accountManagement = new AccountManagement();
+        receiptManagement = new ReceiptManagement();
+        billManagement = new BillManagement();
+        reportManagement = new ReportManagement();
+    }
     public void displayMenu(Scanner scanner) {
         boolean isExit = false;
         int choice;
@@ -22,27 +36,21 @@ public class AdminPresentation implements IManagement {
             choice = CommonHandles.inputChoice(scanner);
             switch (choice){
                 case 1:
-                    IManagement productManagement = new ProductManagement();
                     productManagement.displayMenu(scanner);
                     break;
                 case 2:
-                    IManagement employeeManagement = new EmployeeManagement();
                     employeeManagement.displayMenu(scanner);
                     break;
                 case 3:
-                    IManagement accountManagement = new AccountManagement();
                     accountManagement.displayMenu(scanner);
                     break;
                 case 4:
-                    IManagement receiptManagement = new ReceiptManagement();
                     receiptManagement.displayMenu(scanner);
                     break;
                 case 5:
-                    IManagement billManagement = new BillManagement();
                     billManagement.displayMenu(scanner);
                     break;
                 case 6:
-                    IManagement reportManagement = new ReportManagement();
                     reportManagement.displayMenu(scanner);
                     break;
                 case 7:

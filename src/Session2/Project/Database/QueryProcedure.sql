@@ -8,7 +8,79 @@ begin
     select product_id, product_name, manufacturer, created, batch, quantity, product_status
     from product;
 end &&
-call getAllProducts();
+
+delimiter &&
+drop procedure if exists getProductByPage;
+create procedure if not exists getProductByPage(
+    numPager int
+)
+begin
+    declare limitValue int;
+    declare offsetValue int;
+    set @countProduct = (select count(product.product_id) from product);
+    if (numPager * 10) < @countProduct
+    then
+        set limitValue = 10;
+        set offsetValue = (numPager - 1) * 10;
+    else
+        set limitValue = @countProduct - (numPager - 1) * 10;
+        set offsetValue = (numPager - 1) * 10;
+    end if;
+    select product_id, product_name, manufacturer, created, batch, quantity, product_status
+        from product order by product_id
+            limit limitValue offset offsetValue;
+end &&
+
+delimiter &&
+drop procedure if exists searchForProductNameByPage;
+create procedure if not exists searchForProductNameByPage(
+    in ProductName varchar(150),
+    numPager int
+)
+begin
+    declare limitValue int;
+    declare offsetValue int;
+    set ProductName = concat('%', ProductName, '%');
+    set @countProduct = (select count(product.product_id) from product);
+    if (numPager * 10) < @countProduct
+    then
+        set limitValue = 10;
+        set offsetValue = (numPager - 1) * 10;
+    else
+        set limitValue = @countProduct - (numPager - 1) * 10;
+        set offsetValue = (numPager - 1) * 10;
+    end if;
+    select product_id, product_name, manufacturer, created, batch, quantity, product_status
+        from product
+            where product_name like ProductName
+                order by product_id limit limitValue offset offsetValue;
+end &&
+
+delete from product where true;
+call addNewProduct('P0001', 'Áo thun', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0002', 'Áo thun dài tay', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0003', 'Áo thun ngắn tay', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0004', 'Áo thun màu', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0005', 'Áo thun cổ tròn', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0006', 'Áo thun in hình', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0007', 'Áo thun cổ tim', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0008', 'Áo khoác kéo dây', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0009', 'Áo khoác gió', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0010', 'Áo khoác bông', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0011', 'Áo lông vũ', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0012', 'Áo ba lỗ', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0013', 'Áo len', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0014', 'Áo len cổ lọ', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0015', 'Áo len đan tay', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0016', 'Áo sơ mi trắng', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0017', 'Áo sơ mi trơn', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0018', 'Áo sơ mi công sở', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0019', 'Quần short', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0020', 'Quần jean', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0021', 'Quần âu', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0022', 'Quần thể thao', 'Az shirt', null, 10, 50, true);
+call addNewProduct('P0023', 'Quần unisex', 'Az shirt', null, 10, 50, true);
+select * from product;
 
 delimiter &&
 drop procedure if exists getProductById;
@@ -17,10 +89,20 @@ create procedure if not exists getProductById(
 )
 begin
     select product_id, product_name, manufacturer, created, batch, quantity, product_status
-    from product
-    where product_id = ProductId;
+        from product
+            where BINARY(product_id) = BINARY(ProductId);
 end &&
-call getProductById('P0001');
+
+delimiter &&
+drop procedure if exists getProductByName;
+create procedure if not exists getProductByName(
+    ProductName varchar(150)
+)
+begin
+    select product_id, product_name, manufacturer, created, batch, quantity, product_status
+        from product
+            where BINARY(product_name) = BINARY(ProductName);
+end &&
 
 -- Employee table.
 delimiter &&
