@@ -1,7 +1,7 @@
 package Session2.Project.Backend.Presentation;
 
-import Session2.Project.Backend.Business.ProductBusiness;
-import Session2.Project.Backend.Entity.Product;
+import Session2.Project.Backend.Business.EmployeeBusiness;
+import Session2.Project.Backend.Entity.Employee;
 import Session2.Project.Backend.Utilities.CommonHandles;
 import Session2.Project.Backend.Utilities.InputHandles;
 import Session2.Project.Backend.Utilities.OutputHandles;
@@ -9,10 +9,10 @@ import Session2.Project.Backend.Utilities.OutputHandles;
 import java.util.List;
 import java.util.Scanner;
 
-public class ProductPresentation implements IManagement {
-    private ProductBusiness productBusiness;
-    ProductPresentation(){
-        productBusiness = new ProductBusiness();
+public class EmployeePresentation implements IManagement {
+    private EmployeeBusiness employeeBusiness;
+    EmployeePresentation(){
+        employeeBusiness = new EmployeeBusiness();
     }
     @Override
     public void displayMenu(Scanner scanner) {
@@ -20,30 +20,30 @@ public class ProductPresentation implements IManagement {
         int choice;
         do {
             System.out.print("""
-                    |===============PRODUCT MANAGEMENT===============|
-                    1. Display all products data.
-                    2. Add new products.
-                    3. Update product data.
-                    4. Search for products.
-                    5. Change product status.
+                    |===============EMPLOYEE MANAGEMENT===============|
+                    1. Display all employees data.
+                    2. Add new employees.
+                    3. Update employee data.
+                    4. Change employee status.
+                    5. Search for employees.
                     6. Back.
                     """);
             choice = CommonHandles.inputChoice(scanner);
             switch (choice){
                 case 1:
-                    displayProducts(scanner);
+                    displayEmployees(scanner);
                     break;
                 case 2:
-                    addNewProduct(scanner);
+                    addNewEmployee(scanner);
                     break;
                 case 3:
-                    updateProduct(scanner);
+                    updateEmployee(scanner);
                     break;
                 case 4:
-                    searchProductByName(scanner);
+                    updateEmployeeStatus(scanner);
                     break;
                 case 5:
-                    updateProductStatus(scanner);
+                    searchEmployeeByName(scanner);
                     break;
                 case 6:
                     isExit = true;
@@ -53,23 +53,23 @@ public class ProductPresentation implements IManagement {
             }
         }while (!isExit);
     }
-    public void displayProducts(Scanner scanner) {
+    public void displayEmployees(Scanner scanner) {
         int pageNumber = 1;
-        List<Product> productList = productBusiness.getAll(pageNumber);
-        if(!productList.isEmpty()){
+        List<Employee> employeeList = employeeBusiness.getAll(pageNumber);
+        if(!employeeList.isEmpty()){
             boolean isExit = false;
             do {
                 if (pageNumber <= 0) {
                     System.out.println(OutputHandles.stringWarning("Can't move previous page anymore."));
                     pageNumber = 1;
-                } else if(productList.isEmpty()){
+                } else if(employeeList.isEmpty()){
                     System.out.println(OutputHandles.stringWarning("Can't move previous page anymore."));
                     pageNumber--;
-                } else productList.forEach(System.out::println);
+                } else employeeList.forEach(System.out::println);
                 System.out.print("""
-                   1. Previous product page.
-                   2. Next product page.
-                   3. Exit product list view.
+                   1. Previous employee page.
+                   2. Next employee page.
+                   3. Exit employee list view.
                     """);
                 int choice = CommonHandles.inputChoice(scanner);
                 switch (choice){
@@ -85,79 +85,80 @@ public class ProductPresentation implements IManagement {
                     default:
                         System.err.println("Your choice is not valid value, please try again.");
                 }
-                productList = productBusiness.getAll(pageNumber);
+                employeeList = employeeBusiness.getAll(pageNumber);
             } while (!isExit);
         }else System.err.println("There is no data to display");
     }
-    public void addNewProduct(Scanner scanner) {
-        Product product = new Product();
-        product.inputData(scanner);
-        boolean resultCreate = productBusiness.create(product);
+
+    public void addNewEmployee(Scanner scanner) {
+        Employee employee = new Employee();
+        employee.inputData(scanner);
+        boolean resultCreate = employeeBusiness.create(employee);
         if (resultCreate) {
             System.out.println(OutputHandles.stringSuccess("Create product successfully."));
         } else {
             System.err.println(OutputHandles.stringError("Create product failure."));
         }
     }
-    public void updateProduct(Scanner scanner) {
-        System.out.print("Please enter product id to update data: ");
+    public void updateEmployee(Scanner scanner) {
+        System.out.print("Please enter employee id to update data: ");
         String updateId = InputHandles.inputNormalizeString(scanner);
         if (updateId.length() != 5) {
-            System.err.println("Product id length must be 5 characters.");
+            System.err.println("Employee id length must be 5 characters.");
         }else{
-            Product product = productBusiness.findById(updateId);
-            if (product != null) {
-                product.updateData(scanner);
-                boolean result = productBusiness.update(product);
+            Employee employee = employeeBusiness.findById(updateId);
+            if (employee != null) {
+                employee.updateData(scanner);
+                boolean result = employeeBusiness.update(employee);
                 if (result) {
-                    System.out.println(OutputHandles.stringSuccess("Update product successfully."));
+                    System.out.println(OutputHandles.stringSuccess("Update employee successfully."));
                 } else {
-                    System.err.println(OutputHandles.stringError("Update product failure."));
+                    System.err.println(OutputHandles.stringError("Update employee failure."));
+                }
+            } else {
+                System.err.println("employee is not exists.");
+            }
+        }
+    }
+    public void updateEmployeeStatus(Scanner scanner) {
+        System.out.print("Please enter employee id to update status: ");
+        String updateId = InputHandles.inputNormalizeString(scanner);
+        if (updateId.length() != 5) {
+            System.err.println("Employee id length must be 5 characters.");
+        }else{
+            Employee employee = employeeBusiness.findById(updateId);
+            if (employee != null) {
+                employee.updateStatus(scanner);
+                boolean result = employeeBusiness.update(employee);
+                if (result) {
+                    System.out.println(OutputHandles.stringSuccess("Update employee successfully."));
+                } else {
+                    System.err.println(OutputHandles.stringError("Update employee failure."));
                 }
             } else {
                 System.err.println("Product is not exists.");
             }
         }
     }
-    public void updateProductStatus(Scanner scanner) {
-        System.out.print("Please enter product id to update status: ");
-        String updateId = InputHandles.inputNormalizeString(scanner);
-        if (updateId.length() != 5) {
-            System.err.println("Product id length must be 5 characters.");
-        }else{
-            Product product = productBusiness.findById(updateId);
-            if (product != null) {
-                product.updateStatus(scanner);
-                boolean result = productBusiness.update(product);
-                if (result) {
-                    System.out.println(OutputHandles.stringSuccess("Update product successfully."));
-                } else {
-                    System.err.println(OutputHandles.stringError("Update product failure."));
-                }
-            } else {
-                System.err.println("Product is not exists.");
-            }
-        }
-    }
-    public void searchProductByName(Scanner scanner) {
+    public void searchEmployeeByName(Scanner scanner) {
         System.out.println("Please enter product name to search for: ");
         String findName = InputHandles.inputNormalizeString(scanner);
         int pageNumber = 1;
-        List<Product> productList = productBusiness.search(findName, pageNumber);
-        if(!productList.isEmpty()){
+        List<Employee> employeeList = employeeBusiness.search(findName, pageNumber);
+        if(!employeeList.isEmpty()){
             boolean isExit = false;
             do {
                 if (pageNumber <= 0) {
                     System.out.println(OutputHandles.stringWarning("Can't move previous page anymore."));
                     pageNumber = 1;
-                } else if(productList.isEmpty()){
+                } else if(employeeList.isEmpty()){
                     System.out.println(OutputHandles.stringWarning("Can't move previous page anymore."));
                     pageNumber--;
-                } else productList.forEach(System.out::println);
+                } else employeeList.forEach(System.out::println);
                 System.out.print("""
-                   1. Previous product page.
-                   2. Next product page.
-                   3. Exit product list view.
+                   1. Previous employee page.
+                   2. Next employee page.
+                   3. Exit employee list view.
                     """);
                 int choice = CommonHandles.inputChoice(scanner);
                 switch (choice){
@@ -173,7 +174,7 @@ public class ProductPresentation implements IManagement {
                     default:
                         System.err.println("Your choice is not valid value, please try again.");
                 }
-                productList = productBusiness.search(findName, pageNumber);
+                employeeList = employeeBusiness.getAll(pageNumber);
             } while (!isExit);
         }else System.err.println("There is no data to display");
     }

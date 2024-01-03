@@ -29,11 +29,6 @@ begin
             CreatedDate, BatchValue, QuantityValue, ProductStatus);
 end &&
 
--- Test add new product.
-delete from product where true;
-call addNewProduct('P0001', 'Áo thun', 'Uniqilo', null, 1, null, null);
-select * from product;
-
 delimiter &&
 drop procedure if exists addNewEmployee;
 create procedure if not exists addNewEmployee(
@@ -50,17 +45,10 @@ begin
         values(EmployeeId, EmployeeName, BoD, EmailValue, PhoneValue, AddressValue, EmployeeStatus);
 end &&
 
--- Test add new employee.
-delete from employee where true;
-call addNewEmployee('E0001','Nguyễn Văn A', '1999-10-02',
-                    'maiyoinaisu1102@gmail.com', '0822206919', 'Something', 0);
-select * from employee;
-
 -- Add new account.
 delimiter &&
 drop procedure if exists addNewAccount;
 create procedure if not exists addNewAccount(
-    AccountId int,
     UName varchar(30),
     Pwd varchar(30),
     in PermissionValue bit,
@@ -74,13 +62,8 @@ begin
     if AccountStatus is null
         then set AccountStatus = 1;
     end if;
-    insert into account values (AccountId, UName, Pwd, @InsertPermission, EmployeeId, @InsertStatus);
+    insert into account values (null, UName, Pwd, @InsertPermission, EmployeeId, @InsertStatus);
 end &&
-
--- Test add new Account.
-delete from account where true;
-call addNewAccount('1', 'Admin', 'Admin', null, 'E0001', null);
-select * from account;
 
 -- Add new Bill.
 delimiter &&

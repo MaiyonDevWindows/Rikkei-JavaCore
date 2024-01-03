@@ -13,8 +13,8 @@ public class AdminPresentation implements IManagement {
     private IManagement reportManagement;
     AdminPresentation(){
         productManagement = new ProductPresentation();
-        employeeManagement = new EmployeeManagement();
-        accountManagement = new AccountManagement();
+        employeeManagement = new EmployeePresentation();
+        accountManagement = new AccountPresentation();
         receiptManagement = new ReceiptManagement();
         billManagement = new BillManagement();
         reportManagement = new ReportManagement();

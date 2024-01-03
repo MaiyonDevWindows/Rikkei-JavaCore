@@ -41,7 +41,8 @@ begin
     declare limitValue int;
     declare offsetValue int;
     set ProductName = concat('%', ProductName, '%');
-    set @countProduct = (select count(product.product_id) from product);
+    set @countProduct = (select count(product_id) from product
+                         where product_name like ProductName);
     if (numPager * 10) < @countProduct
     then
         set limitValue = 10;
@@ -112,7 +113,6 @@ begin
     select emp_id, emp_name, birth_of_day, email, phone, address, emp_status
     from employee;
 end &&
-call getAllEmployees();
 
 delimiter &&
 drop procedure if exists getEmployeeById;
@@ -122,9 +122,67 @@ create procedure if not exists getEmployeeById(
 begin
     select emp_id, emp_name, birth_of_day, email, phone, address, emp_status
     from employee
-    where emp_id = EmployeeId;
+    where BINARY(emp_id) = BINARY(EmployeeId);
 end &&
-call getEmployeeById('E0001');
+
+delimiter &&
+drop procedure if exists getEmployeeByName;
+create procedure if not exists getEmployeeByName(
+    EmployeeName varchar(100)
+)
+begin
+    select emp_id, emp_name, birth_of_day, email, phone, address, emp_status
+    from employee
+    where BINARY(emp_name) = BINARY(EmployeeName);
+end &&
+
+delimiter &&
+drop procedure if exists getEmployeeByPage;
+create procedure if not exists getEmployeeByPage(
+    numPager int
+)
+begin
+    declare limitValue int;
+    declare offsetValue int;
+    set @countEmployee = (select count(emp_id) from employee);
+    if (numPager * 10) < @countEmployee
+    then
+        set limitValue = 10;
+        set offsetValue = (numPager - 1) * 10;
+    else
+        set limitValue = @countEmployee - (numPager - 1) * 10;
+        set offsetValue = (numPager - 1) * 10;
+    end if;
+    select emp_id, emp_name, birth_of_day, email, phone, address, emp_status
+    from employee order by emp_name
+    limit limitValue offset offsetValue;
+end &&
+
+delimiter &&
+drop procedure if exists searchForEmployeeNameByPage;
+create procedure if not exists searchForEmployeeNameByPage(
+    in EmployeeName varchar(150),
+    numPager int
+)
+begin
+    declare limitValue int;
+    declare offsetValue int;
+    set EmployeeName = concat('%', EmployeeName, '%');
+    set @countEmployee = (select count(emp_id) from employee
+                          where employee.emp_name like EmployeeName);
+    if (numPager * 10) < @countEmployee
+    then
+        set limitValue = 10;
+        set offsetValue = (numPager - 1) * 10;
+    else
+        set limitValue = @countEmployee - (numPager - 1) * 10;
+        set offsetValue = (numPager - 1) * 10;
+    end if;
+    select emp_id, emp_name, birth_of_day, email, phone, address, emp_status
+    from employee
+    where employee.emp_name like EmployeeName
+    order by emp_name limit limitValue offset offsetValue;
+end &&
 
 -- Account table.
 delimiter &&
@@ -155,8 +213,18 @@ create procedure if not exists getAccountByUName(
 )
 begin
     select acc_id, user_name, password, permission, emp_id, acc_status
-    from account
-    where user_name = Username;
+        from account
+            where binary(user_name) = binary(Username);
+end &&
+
+delimiter &&
+drop procedure if exists searchAccountByEmployeeId;
+create procedure if not exists searchAccountByEmployeeId(
+    EmployeeId char(5)
+)
+begin
+    select acc_id, user_name, password, permission, emp_id, acc_status
+    from account where emp_id = EmployeeId;
 end &&
 
 delimiter &&
@@ -169,6 +237,55 @@ begin
     select acc_id, user_name, password, permission, emp_id, acc_status
     from account
     where BINARY(user_name) = BINARY(UName) and BINARY(password) = BINARY(Pwd);
+end &&
+
+delimiter &&
+drop procedure if exists getAccountByPage;
+create procedure if not exists getAccountByPage(
+    numPager int
+)
+begin
+    declare limitValue int;
+    declare offsetValue int;
+    set @countAccount = (select count(acc_id) from account);
+    if (numPager * 10) < @countAccount
+    then
+        set limitValue = 10;
+        set offsetValue = (numPager - 1) * 10;
+    else
+        set limitValue = @countAccount - (numPager - 1) * 10;
+        set offsetValue = (numPager - 1) * 10;
+    end if;
+    select acc_id, user_name, password, permission, emp_id, acc_status
+    from account order by acc_id
+    limit limitValue offset offsetValue;
+end &&
+
+delimiter &&
+drop procedure if exists searchForAccountByPage;
+create procedure if not exists searchForAccountByPage(
+    in UName varchar(150),
+    numPager int
+)
+begin
+    declare limitValue int;
+    declare offsetValue int;
+    set UName = concat('%', UName, '%');
+    set @countAccount = (select count(account.acc_id) from account
+                        join project_management.employee e on e.emp_id = account.emp_id
+                         where account.user_name like UName or e.emp_name like UName);
+    if (numPager * 10) < @countAccount
+    then
+        set limitValue = 10;
+        set offsetValue = (numPager - 1) * 10;
+    else
+        set limitValue = @countAccount - (numPager - 1) * 10;
+        set offsetValue = (numPager - 1) * 10;
+    end if;
+    select acc_id, user_name, password, permission, e.emp_id, acc_status from account
+        join project_management.employee e on e.emp_id = account.emp_id
+            where account.user_name like UName or e.emp_name like UName
+                order by acc_id limit limitValue offset offsetValue;
 end &&
 
 -- bill.

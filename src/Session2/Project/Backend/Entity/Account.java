@@ -1,6 +1,10 @@
 package Session2.Project.Backend.Entity;
 
+import Session2.Project.Backend.Business.AccountBusiness;
+import Session2.Project.Backend.Utilities.InputHandles;
+
 import java.io.Serializable;
+import java.util.Scanner;
 
 public class Account implements IEntity, Serializable {
     private int accountId;
@@ -75,10 +79,6 @@ public class Account implements IEntity, Serializable {
     public void setAccountStatus(boolean accountStatus) {
         this.accountStatus = accountStatus;
     }
-
-    // Input.
-
-    // Check.
     public boolean isActive(){
         return accountStatus == AccountStatus.ACTIVE.getStatus();
     }
@@ -96,7 +96,55 @@ public class Account implements IEntity, Serializable {
                 ", accountStatus=" + accountStatus +
                 '}';
     }
-
+    public void inputData(Scanner scanner) {
+        userName = inputUserName(scanner);
+        password = inputPassword(scanner);
+        permission = inputPermission(scanner);
+        employeeId = inputEmployeeId(scanner);
+        accountStatus = inputAccStatus(scanner);
+    }
+    public String inputUserName(Scanner scanner) {
+        AccountBusiness accountBusiness = new AccountBusiness();
+        System.out.print("Please enter user name: ");
+        do {
+            String username = InputHandles.inputNormalizeString(scanner);
+            if (username.isEmpty()) {
+                System.err.println("Product must not be empty.");
+            } else if (accountBusiness.findByName(username) != null) {
+                System.err.println("Product name is exists, please re enter another product name.");
+            } else return username;
+        } while (true);
+    }
+    public String inputPassword(Scanner scanner) {
+        System.out.print("Please enter password: ");
+        do {
+            String password = InputHandles.inputNormalizeString(scanner);
+            if (password.isEmpty()) {
+                System.err.println("Password must not be empty.");
+            } else return password;
+        } while (true);
+    }
+    public boolean inputPermission(Scanner scanner){
+        System.out.print("Please enter permission for account (true: user/false: admin): ");
+        return InputHandles.inputBoolean(scanner);
+    }
+    public String inputEmployeeId(Scanner scanner) {
+        AccountBusiness accountBusiness = new AccountBusiness();
+        System.out.print("Please enter employee id: ");
+//        do {
+//            String employeeId = InputHandles.inputNormalizeString(scanner);
+//            if (employeeId.trim().length() != 5) {
+//                System.err.println("Employee id length must be 5 characters.");
+//            } else if (accountBusiness.searchAccountByEmployeeId(employeeId).isEmpty()) {
+//                System.err.println("Employee id is used, please re enter another employee id.");
+//            } else return employeeId;
+//        } while (true);
+        return "";
+    }
+    public boolean inputAccStatus(Scanner scanner){
+        System.out.print("Please enter account (true: active/false: locked): ");
+        return InputHandles.inputBoolean(scanner);
+    }
     public enum Permission {
         ADMIN((boolean) false),
         USER((boolean) true);

@@ -1,6 +1,5 @@
 package Session2.Project.Backend.Business;
 
-import Session2.Project.Backend.DataManager.DbConnection;
 import Session2.Project.Backend.DataManager.MySqlConnection;
 import Session2.Project.Backend.Entity.Product;
 

@@ -17,3 +17,25 @@ begin
             product_status = ProductStatus
         where product_id = ProductId;
 end &&
+
+delimiter &&
+drop procedure if exists updateEmployeeById;
+create procedure if not exists updateEmployeeById(
+    EmployeeId char(5),
+    EmployeeName varchar(100),
+    Bod date,
+    EmailValue varchar(100),
+    PhoneValue varchar(100),
+    AddressValue text,
+    EmployeeStatus smallint
+)
+begin
+    update employee
+    set emp_name     = EmployeeName,
+        birth_of_day = Bod,
+        email        = EmailValue,
+        phone        = PhoneValue,
+        address      = AddressValue,
+        emp_status   =EmployeeStatus
+    where emp_id = EmployeeId;
+end &&

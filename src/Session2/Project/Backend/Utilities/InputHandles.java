@@ -43,6 +43,19 @@ public class InputHandles {
             }
         }while (true);
     }
+    public static byte inputByte(Scanner scanner) {
+        byte input;
+        do {
+            try {
+                input = Byte.parseByte(scanner.nextLine());
+                return input;
+            } catch (NumberFormatException e) {
+                System.err.println("Your input value is not byte, please try again.");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }while (true);
+    }
     public static float inputFloat(Scanner scanner){
         float input;
         do {
